@@ -1,0 +1,197 @@
+// ==============================================
+// Ethiopian Orthodox Mezmur Platform
+// Prisma Schema — Neon DB (Serverless Postgres)
+// ==============================================
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+
+// ==============================================
+// Better Auth Models
+// These models are required by Better Auth's
+// Prisma adapter. Do not rename the fields.
+// ==============================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified Boolean   @default(false)
+  image         String?
+  role          String    @default("user") // "user" | "admin"
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  sessions  Session[]
+  accounts  Account[]
+  favorites Favorite[]
+  ratings   Rating[]
+
+  @@map("users")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("sessions")
+}
+
+model Account {
+  id                    String    @id @default(cuid())
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@map("accounts")
+}
+
+model Verification {
+  id         String   @id @default(cuid())
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@map("verifications")
+}
+
+// ==============================================
+// Application Models
+// ==============================================
+
+model Category {
+  id                 String        @id @default(cuid())
+  name               String        @unique // "የምስጋና መዝሙር"
+  nameTransliterated String?                // "Praise Hymns" (English equivalent)
+  description        String?
+  iconName           String?                // Lucide icon name for sidebar UI
+
+  subCategories SubCategory[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("categories")
+}
+
+model SubCategory {
+  id                 String   @id @default(cuid())
+  name               String   // "የቅድስት ሥላሴ"
+  nameTransliterated String?  // "Holy Trinity"
+  description        String?
+  iconName           String?  // Lucide icon name
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  mezmurs Mezmur[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([name, categoryId])
+  @@map("sub_categories")
+}
+
+model Zemari {
+  id          String  @id @default(cuid())
+  name        String  @unique // English or transliterated name
+  nameAmharic String?         // Name in Amharic script
+  bio         String?
+  imageUrl    String?
+
+  mezmurs Mezmur[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("zemarian")
+}
+
+enum YoutubeUrlSource {
+  AUTO_FETCHED
+  ADMIN_OVERRIDE
+}
+
+model Mezmur {
+  id      String   @id @default(cuid())
+  title   String   // Amharic title — "ዋይ ዜማ"
+  lyrics  String[] // Postgres array — each element is one verse line
+  meaning String?  // Optional Ge'ez-to-Amharic translation
+
+  // --- YouTube Cache Strategy ---
+  // null  = Cache MISS → triggers YouTube Data API v3 search
+  // value = Cache HIT  → serve instantly, skip API call
+  youtubeUrl       String?
+  youtubeUrlSource YoutubeUrlSource?
+
+  // --- Relationships ---
+  subCategoryId String
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
+
+  zemariId String?
+  zemari   Zemari? @relation(fields: [zemariId], references: [id])
+
+  favorites Favorite[]
+  ratings   Rating[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([subCategoryId])
+  @@index([zemariId])
+  @@index([title])
+  @@map("mezmurs")
+}
+
+model Favorite {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mezmurId String
+  mezmur   Mezmur @relation(fields: [mezmurId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, mezmurId]) // One favorite per user per mezmur
+  @@map("favorites")
+}
+
+model Rating {
+  id       String @id @default(cuid())
+  value    Int    // 1–5 star rating
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mezmurId String
+  mezmur   Mezmur @relation(fields: [mezmurId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, mezmurId]) // One rating per user per mezmur
+  @@map("ratings")
+}
