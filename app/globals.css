@@ -1,1 +1,468 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+/* ============================================================
+   🕊️ Ethiopian Orthodox Mezmur Platform — Design System
+   
+   Architecture:
+   - 5 spiritual themes driven by CSS custom properties
+   - OS preference maps to: dark → Sacred Night, light → Holy Parchment
+   - Manual override via [data-theme] on <html>
+   - Two font stacks: Geist (UI) + Noto Serif Ethiopic (Amharic lyrics)
+   ============================================================ */
+
+/* ── Layout constants ─────────────────────────────────────── */
+:root {
+  --sidebar-width: 240px;
+  --player-height: 80px;
+  --radius-sm: 6px;
+  --radius: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition: 180ms ease;
+  --transition-slow: 360ms ease;
+}
+
+/* ============================================================
+   🕯️ THEME 1 — SACRED NIGHT (Dark Default)
+   Inspiration: candlelit sanctuary at midnight
+   ============================================================ */
+html[data-theme="sacred-night"] {
+  --color-bg: 22 15% 4%; /* Near-black, warm tinge */
+  --color-surface: 22 12% 8%; /* Cards, panels */
+  --color-surface-2: 22 10% 12%; /* Elevated surfaces */
+  --color-overlay: 22 10% 16%; /* Hover, active */
+
+  --color-accent: 43 82% 52%; /* Amber gold — candlelight */
+  --color-accent-2: 43 60% 38%; /* Muted gold */
+  --color-accent-glow: 43 82% 52%;
+
+  --color-text: 40 20% 92%; /* Warm white */
+  --color-text-2: 40 10% 58%; /* Muted text */
+  --color-text-3: 40 8% 38%; /* Placeholder */
+  --color-text-on-accent: 22 15% 5%; /* Text on gold button */
+
+  --color-border: 22 12% 16%;
+  --color-border-2: 22 10% 12%;
+
+  --color-sidebar-bg: 22 14% 6%;
+  --color-player-bg: 22 14% 5%;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px hsl(22 15% 2% / 0.4);
+  --shadow: 0 4px 16px hsl(22 15% 2% / 0.6);
+  --shadow-lg: 0 8px 32px hsl(22 15% 2% / 0.8);
+  --shadow-accent: 0 0 24px hsl(43 82% 52% / 0.25);
+}
+
+/* ============================================================
+   📜 THEME 2 — HOLY PARCHMENT (Light Default)
+   Inspiration: ancient Ethiopian Ge'ez manuscript on brana (vellum)
+   ============================================================ */
+html[data-theme="holy-parchment"] {
+  --color-bg: 40 35% 93%; /* Warm cream */
+  --color-surface: 40 28% 89%; /* Slightly deeper */
+  --color-surface-2: 40 30% 97%; /* Card on cream */
+  --color-overlay: 40 20% 84%; /* Hover */
+
+  --color-accent: 25 62% 30%; /* Rich sepia brown */
+  --color-accent-2: 25 45% 52%; /* Lighter sienna */
+  --color-accent-glow: 25 62% 30%;
+
+  --color-text: 25 28% 14%; /* Deep warm brown-black */
+  --color-text-2: 25 18% 42%; /* Medium brown */
+  --color-text-3: 25 12% 62%; /* Light brown */
+  --color-text-on-accent: 40 35% 95%;
+
+  --color-border: 40 18% 76%;
+  --color-border-2: 40 18% 86%;
+
+  --color-sidebar-bg: 40 28% 88%;
+  --color-player-bg: 40 28% 86%;
+
+  --shadow-sm: 0 1px 3px hsl(25 28% 20% / 0.08);
+  --shadow: 0 4px 16px hsl(25 28% 20% / 0.12);
+  --shadow-lg: 0 8px 32px hsl(25 28% 20% / 0.18);
+  --shadow-accent: 0 0 24px hsl(25 62% 30% / 0.15);
+}
+
+/* ============================================================
+   🌊 THEME 3 — MARIAN BLUE
+   Inspiration: the blue robes of the Virgin Mary, Ethiopian night sky
+   ============================================================ */
+html[data-theme="marian-blue"] {
+  --color-bg: 222 48% 6%;
+  --color-surface: 222 44% 9%;
+  --color-surface-2: 222 40% 13%;
+  --color-overlay: 222 36% 17%;
+
+  --color-accent: 210 84% 68%; /* Celestial blue */
+  --color-accent-2: 210 60% 48%;
+  --color-accent-glow: 210 84% 68%;
+
+  --color-text: 210 22% 94%;
+  --color-text-2: 222 18% 60%;
+  --color-text-3: 222 14% 40%;
+  --color-text-on-accent: 222 48% 6%;
+
+  --color-border: 222 28% 16%;
+  --color-border-2: 222 28% 12%;
+
+  --color-sidebar-bg: 222 50% 5%;
+  --color-player-bg: 222 50% 4%;
+
+  --shadow-sm: 0 1px 3px hsl(222 48% 2% / 0.5);
+  --shadow: 0 4px 16px hsl(222 48% 2% / 0.7);
+  --shadow-lg: 0 8px 32px hsl(222 48% 2% / 0.85);
+  --shadow-accent: 0 0 24px hsl(210 84% 68% / 0.25);
+}
+
+/* ============================================================
+   🌿 THEME 4 — HOLY FOREST
+   Inspiration: Timkat baptism at the river, incense smoke in nature
+   ============================================================ */
+html[data-theme="holy-forest"] {
+  --color-bg: 152 42% 4%;
+  --color-surface: 152 36% 7%;
+  --color-surface-2: 152 30% 10%;
+  --color-overlay: 152 26% 14%;
+
+  --color-accent: 88 46% 54%; /* Sage olive green */
+  --color-accent-2: 88 34% 38%;
+  --color-accent-glow: 88 46% 54%;
+
+  --color-text: 85 18% 92%;
+  --color-text-2: 152 14% 58%;
+  --color-text-3: 152 10% 38%;
+  --color-text-on-accent: 152 42% 5%;
+
+  --color-border: 152 20% 14%;
+  --color-border-2: 152 18% 10%;
+
+  --color-sidebar-bg: 152 44% 3%;
+  --color-player-bg: 152 44% 3%;
+
+  --shadow-sm: 0 1px 3px hsl(152 42% 2% / 0.5);
+  --shadow: 0 4px 16px hsl(152 42% 2% / 0.7);
+  --shadow-lg: 0 8px 32px hsl(152 42% 2% / 0.85);
+  --shadow-accent: 0 0 24px hsl(88 46% 54% / 0.2);
+}
+
+/* ============================================================
+   🌅 THEME 5 — MESKEL DAWN (Light)
+   Inspiration: the Meskel bonfire at dawn, sunrise light
+   ============================================================ */
+html[data-theme="meskel-dawn"] {
+  --color-bg: 30 45% 96%;
+  --color-surface: 30 35% 91%;
+  --color-surface-2: 30 40% 99%;
+  --color-overlay: 30 28% 86%;
+
+  --color-accent: 22 88% 44%; /* Vibrant flame orange */
+  --color-accent-2: 22 68% 58%;
+  --color-accent-glow: 22 88% 44%;
+
+  --color-text: 22 32% 12%;
+  --color-text-2: 22 18% 38%;
+  --color-text-3: 22 12% 58%;
+  --color-text-on-accent: 30 45% 97%;
+
+  --color-border: 30 22% 80%;
+  --color-border-2: 30 22% 90%;
+
+  --color-sidebar-bg: 30 35% 92%;
+  --color-player-bg: 30 35% 90%;
+
+  --shadow-sm: 0 1px 3px hsl(22 32% 15% / 0.08);
+  --shadow: 0 4px 16px hsl(22 32% 15% / 0.12);
+  --shadow-lg: 0 8px 32px hsl(22 32% 15% / 0.18);
+  --shadow-accent: 0 0 24px hsl(22 88% 44% / 0.2);
+}
+
+/* ============================================================
+   OS default — before JS loads (no flash)
+   light OS → Holy Parchment, dark OS → Sacred Night
+   ============================================================ */
+:root:not([data-theme]) {
+  /* Safe fallback (Sacred Night) in case JS hasn't run yet */
+  --color-bg: 22 15% 4%;
+  --color-surface: 22 12% 8%;
+  --color-surface-2: 22 10% 12%;
+  --color-overlay: 22 10% 16%;
+  --color-accent: 43 82% 52%;
+  --color-accent-2: 43 60% 38%;
+  --color-accent-glow: 43 82% 52%;
+  --color-text: 40 20% 92%;
+  --color-text-2: 40 10% 58%;
+  --color-text-3: 40 8% 38%;
+  --color-text-on-accent: 22 15% 5%;
+  --color-border: 22 12% 16%;
+  --color-border-2: 22 10% 12%;
+  --color-sidebar-bg: 22 14% 6%;
+  --color-player-bg: 22 14% 5%;
+  --shadow-sm: 0 1px 3px hsl(22 15% 2% / 0.4);
+  --shadow: 0 4px 16px hsl(22 15% 2% / 0.6);
+  --shadow-lg: 0 8px 32px hsl(22 15% 2% / 0.8);
+  --shadow-accent: 0 0 24px hsl(43 82% 52% / 0.25);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-bg: 40 35% 93%;
+    --color-surface: 40 28% 89%;
+    --color-surface-2: 40 30% 97%;
+    --color-overlay: 40 20% 84%;
+    --color-accent: 25 62% 30%;
+    --color-accent-2: 25 45% 52%;
+    --color-accent-glow: 25 62% 30%;
+    --color-text: 25 28% 14%;
+    --color-text-2: 25 18% 42%;
+    --color-text-3: 25 12% 62%;
+    --color-text-on-accent: 40 35% 95%;
+    --color-border: 40 18% 76%;
+    --color-border-2: 40 18% 86%;
+    --color-sidebar-bg: 40 28% 88%;
+    --color-player-bg: 40 28% 86%;
+    --shadow-sm: 0 1px 3px hsl(25 28% 20% / 0.08);
+    --shadow: 0 4px 16px hsl(25 28% 20% / 0.12);
+    --shadow-lg: 0 8px 32px hsl(25 28% 20% / 0.18);
+    --shadow-accent: 0 0 24px hsl(25 62% 30% / 0.15);
+  }
+}
+
+/* ============================================================
+   Base Styles
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* Background on html ensures theme vars apply before body paints */
+  background-color: hsl(var(--color-bg));
+  color: hsl(var(--color-text));
+  transition:
+    background-color var(--transition-slow),
+    color var(--transition-slow);
+}
+
+body {
+  background-color: hsl(var(--color-bg));
+  color: hsl(var(--color-text));
+  font-family: var(--font-geist-sans, system-ui, sans-serif);
+  min-height: 100vh;
+  transition:
+    background-color var(--transition-slow),
+    color var(--transition-slow);
+  padding-bottom: var(--player-height);
+}
+
+/* ── Ethiopic text layer ───────────────────────────────────── */
+.font-ethiopic,
+[lang="am"],
+[lang="ti"] {
+  font-family: var(--font-noto-ethiopic, "Noto Serif Ethiopic", serif);
+  line-height: 1.9; /* Ethiopic script needs generous line height */
+  letter-spacing: 0.01em;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--color-border));
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--color-text-3));
+}
+
+/* ── Selection ─────────────────────────────────────────────── */
+::selection {
+  background: hsl(var(--color-accent) / 0.3);
+  color: hsl(var(--color-text));
+}
+
+/* ── Focus rings ───────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid hsl(var(--color-accent));
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── App shell layout ──────────────────────────────────────── */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: calc(100vh - var(--player-height));
+  background: hsl(var(--color-sidebar-bg));
+  border-right: 1px solid hsl(var(--color-border));
+  overflow-y: auto;
+  z-index: 40;
+  transition: transform var(--transition-slow);
+}
+
+.app-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  padding-bottom: var(--player-height);
+}
+
+.app-player {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--player-height);
+  background: hsl(var(--color-player-bg));
+  border-top: 1px solid hsl(var(--color-border));
+  z-index: 50;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Mobile: sidebar hidden off-screen */
+@media (max-width: 768px) {
+  .app-sidebar {
+    transform: translateX(-100%);
+  }
+  .app-sidebar.is-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-lg);
+  }
+  .app-main {
+    margin-left: 0;
+  }
+}
+
+/* ── Sidebar overlay (mobile) ─────────────────────────────── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: hsl(var(--color-bg) / 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 39;
+}
+@media (max-width: 768px) {
+  .sidebar-overlay.is-open {
+    display: block;
+  }
+}
+
+/* ── Utility classes ───────────────────────────────────────── */
+.surface {
+  background: hsl(var(--color-surface));
+  border: 1px solid hsl(var(--color-border));
+  border-radius: var(--radius);
+}
+
+.surface-2 {
+  background: hsl(var(--color-surface-2));
+  border: 1px solid hsl(var(--color-border-2));
+  border-radius: var(--radius);
+}
+
+/* Accent gradient — used on buttons, badges */
+.accent-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--color-accent)),
+    hsl(var(--color-accent-2))
+  );
+  color: hsl(var(--color-text-on-accent));
+}
+
+/* Glow effect for now-playing elements */
+.accent-glow {
+  box-shadow: var(--shadow-accent);
+}
+
+/* Text utilities */
+.text-accent {
+  color: hsl(var(--color-accent));
+}
+.text-muted {
+  color: hsl(var(--color-text-2));
+}
+.text-faint {
+  color: hsl(var(--color-text-3));
+}
+.text-primary {
+  color: hsl(var(--color-text));
+}
+
+/* Smooth theme transitions on key properties */
+.surface,
+.surface-2,
+.app-sidebar,
+.app-player {
+  transition:
+    background-color var(--transition-slow),
+    border-color var(--transition-slow);
+}
+
+/* Micro-animation: fade in */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-in {
+  animation: fadeIn 300ms ease forwards;
+}
+
+/* Micro-animation: scale in (for modals/drawers) */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.animate-scale-in {
+  animation: scaleIn 200ms ease forwards;
+}
+
+/* Pulse — for playing indicator dot */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+.animate-pulse-glow {
+  animation: pulse-glow 1.8s ease-in-out infinite;
+}
