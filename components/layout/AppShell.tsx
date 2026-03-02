@@ -3,14 +3,11 @@
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { GlobalAudioPlayer } from "./GlobalAudioPlayer";
-
-// ── App Shell ─────────────────────────────────────────────────────────────────
-// Manages the sidebar open/close state for mobile.
-// The sidebar itself is server-renderable; the open/close toggle lives here.
-// ─────────────────────────────────────────────────────────────────────────────
+import { usePlayerKeyboardShortcuts } from "@/hooks/usePlayerKeyboardShortcuts";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  usePlayerKeyboardShortcuts(); // ← Global keyboard shortcuts (Space, M, N, P, ←, →)
 
   const open = () => setSidebarOpen(true);
   const close = () => setSidebarOpen(false);

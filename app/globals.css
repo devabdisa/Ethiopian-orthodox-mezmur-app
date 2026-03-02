@@ -14,7 +14,7 @@
 /* ── Layout constants ─────────────────────────────────────── */
 :root {
   --sidebar-width: 240px;
-  --player-height: 80px;
+  --player-height: 90px;
   --radius-sm: 6px;
   --radius: 10px;
   --radius-lg: 16px;

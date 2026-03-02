@@ -65,7 +65,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="am" suppressHydrationWarning>
+    <html lang="am" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         {/*
          * Anti-flash script:
@@ -85,6 +85,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${geistSans.variable} ${notoSerif.variable} antialiased`}
+        suppressHydrationWarning
       >
         <ThemeProvider>
           <AppShell>{children}</AppShell>
