@@ -4,6 +4,7 @@ import prisma from "@/lib/db/prisma";
 import { MezmurRow } from "@/components/mezmur/MezmurRow";
 import { Pagination } from "@/components/ui/Pagination";
 import { PlayAllButton } from "@/components/mezmur/PlayAllButton";
+import { getFavoriteIds } from "@/app/actions/favorites";
 import { type Mezmur, type SubCategory } from "@/app/generated/prisma/client";
 
 const PER_PAGE = 30; // 30 mezmurs per page
@@ -93,6 +94,11 @@ export default async function CategoryPage({
     subCategoryName: (m as any).subCategory?.name ?? "",
   }));
 
+  // 6. Batch-fetch which mezmurs are favorited by the current user (if logged in)
+  const mezmurIds = mezmursList.map((m) => m.id);
+  const favoritedIds = await getFavoriteIds(mezmurIds);
+  const favoritedSet = new Set(favoritedIds);
+
   return (
     <div className="cat-page">
       {/* ── Breadcrumb ── */}
@@ -164,6 +170,7 @@ export default async function CategoryPage({
                       subCategoryName={group.subCategory.name}
                       index={globalIndex}
                       queue={pageQueue}
+                      isFavorited={favoritedSet.has(mezmur.id)}
                     />
                   );
                 })}

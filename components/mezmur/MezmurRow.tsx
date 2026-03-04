@@ -3,13 +3,15 @@
 import Link from "next/link";
 import { type Mezmur } from "@/app/generated/prisma/client";
 import { PlayMezmurButton } from "./PlayMezmurButton";
+import { FavoriteButton } from "./FavoriteButton";
 import type { PlayerTrack } from "@/types";
 
 interface MezmurRowProps {
   mezmur: Mezmur;
   subCategoryName: string;
   index: number;
-  queue?: PlayerTrack[]; // Full page queue for Next/Prev
+  queue?: PlayerTrack[];
+  isFavorited?: boolean; // Pre-loaded from the server
 }
 
 export function MezmurRow({
@@ -17,6 +19,7 @@ export function MezmurRow({
   subCategoryName,
   index,
   queue,
+  isFavorited = false,
 }: MezmurRowProps) {
   const track = {
     id: mezmur.id,
@@ -42,8 +45,13 @@ export function MezmurRow({
         </div>
       </Link>
 
-      {/* ── Play button (Client side, connects to Zustand) ── */}
+      {/* ── Actions: Favorite + Play ── */}
       <div className="row-actions">
+        <FavoriteButton
+          mezmurId={mezmur.id}
+          initialFavorited={isFavorited}
+          size={16}
+        />
         <PlayMezmurButton track={track} queue={queue} variant="icon" />
       </div>
 
@@ -119,7 +127,10 @@ const styles = `
   }
 
   .row-actions {
-    padding-left: 16px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding-left: 12px;
     flex-shrink: 0;
   }
 `;

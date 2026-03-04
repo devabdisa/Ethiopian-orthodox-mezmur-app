@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { THEMES, type ThemeId } from "@/types";
+import { useSession, signOut } from "@/lib/auth-client";
 
 // ── Nav items ─────────────────────────────────────────────────────────────────
 const NAV_ITEMS = [
@@ -25,7 +26,9 @@ const THEME_COLORS: Record<ThemeId, string> = {
 // ─────────────────────────────────────────────────────────────────────────────
 export function Sidebar({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { theme, setTheme, themes } = useTheme();
+  const { data: session } = useSession();
 
   return (
     <aside className="sidebar-inner">
@@ -88,14 +91,42 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
       {/* ── Divider ── */}
       <div className="sidebar-divider" />
 
-      {/* ── Auth placeholder ── */}
-      <div className="sidebar-auth">
-        <div className="auth-avatar">👤</div>
-        <div className="auth-info">
-          <span className="auth-name">Sign In</span>
-          <span className="auth-sub">to save favorites</span>
+      {/* ── Auth profile or Login link ── */}
+      {session?.user ? (
+        <div className="sidebar-auth logged-in">
+          <div className="auth-avatar">
+            {session.user.image ? (
+              <img src={session.user.image} alt={session.user.name} />
+            ) : (
+              <span className="font-ethiopic text-sm">
+                {session.user.name.charAt(0).toUpperCase()}
+              </span>
+            )}
+          </div>
+          <div className="auth-info">
+            <span className="auth-name">{session.user.name}</span>
+            <span className="auth-sub">Logged in</span>
+          </div>
+          <button
+            onClick={async () => {
+              await signOut();
+              router.refresh();
+            }}
+            className="logout-btn"
+            title="Sign Out"
+          >
+            <LogOutIcon size={16} />
+          </button>
         </div>
-      </div>
+      ) : (
+        <Link href="/auth" onClick={onClose} className="sidebar-auth">
+          <div className="auth-avatar">👤</div>
+          <div className="auth-info">
+            <span className="auth-name">Sign In</span>
+            <span className="auth-sub">to save favorites</span>
+          </div>
+        </Link>
+      )}
 
       {/* ── Bottom branding ── */}
       <div className="sidebar-footer">
@@ -300,6 +331,13 @@ const sidebarStyles = `
     justify-content: center;
     background: hsl(var(--color-overlay));
     border-radius: 50%;
+    overflow: hidden;
+  }
+
+  .auth-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .auth-info {
@@ -317,6 +355,25 @@ const sidebarStyles = `
   .auth-sub {
     font-size: 11px;
     color: hsl(var(--color-text-3));
+  }
+
+  .logout-btn {
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: hsl(var(--color-text-2));
+    cursor: pointer;
+    padding: 6px;
+    border-radius: var(--radius);
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logout-btn:hover {
+    background: hsl(0 84% 60% / 0.1);
+    color: hsl(0 84% 60%);
   }
 
   .sidebar-footer {
@@ -400,6 +457,25 @@ function HeartIcon({ size = 20 }: { size?: number }) {
       strokeLinejoin="round"
     >
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+    </svg>
+  );
+}
+
+function LogOutIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
     </svg>
   );
 }

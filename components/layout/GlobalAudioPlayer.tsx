@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 import { usePlayerStore } from "@/store/playerStore";
+import { logListen } from "@/app/actions/history";
 import {
   PrevIcon,
   PlayIcon,
@@ -147,6 +148,9 @@ export function GlobalAudioPlayer() {
       setUrlError(false);
       return;
     }
+
+    // ── Log the listen (fire and forget) ────────────────────────────────────
+    logListen(currentTrack.id).catch(console.error);
 
     // ── URL already cached on this track object ─────────────────────────────
     if (currentTrack.youtubeUrl) {

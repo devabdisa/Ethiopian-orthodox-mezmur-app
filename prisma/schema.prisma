@@ -27,10 +27,11 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  sessions  Session[]
-  accounts  Account[]
-  favorites Favorite[]
-  ratings   Rating[]
+  sessions       Session[]
+  accounts       Account[]
+  favorites      Favorite[]
+  ratings        Rating[]
+  listenHistory  ListenHistory[]
 
   @@map("users")
 }
@@ -156,8 +157,9 @@ model Mezmur {
   zemariId String?
   zemari   Zemari? @relation(fields: [zemariId], references: [id])
 
-  favorites Favorite[]
-  ratings   Rating[]
+  favorites      Favorite[]
+  ratings        Rating[]
+  listenHistory  ListenHistory[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -195,3 +197,18 @@ model Rating {
   @@unique([userId, mezmurId]) // One rating per user per mezmur
   @@map("ratings")
 }
+
+model ListenHistory {
+  id       String @id @default(cuid())
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mezmurId String
+  mezmur   Mezmur @relation(fields: [mezmurId], references: [id], onDelete: Cascade)
+
+  playedAt DateTime @default(now()) // Updated on replay (upsert)
+
+  @@unique([userId, mezmurId]) // One entry per user per mezmur (upsert updates playedAt)
+  @@index([userId, playedAt(sort: Desc)]) // Fast query for "recently played"
+  @@map("listen_history")
+}
+

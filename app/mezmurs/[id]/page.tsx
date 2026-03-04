@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import prisma from "@/lib/db/prisma";
 import { PlayMezmurButton } from "@/components/mezmur/PlayMezmurButton";
+import { FavoriteButton } from "@/components/mezmur/FavoriteButton";
+import { getFavoriteIds } from "@/app/actions/favorites";
 
 export default async function MezmurPage({
   params,
@@ -31,6 +33,10 @@ export default async function MezmurPage({
   };
 
   const catSlug = encodeURIComponent(mezmur.subCategory.category.name);
+
+  // Check if this mezmur is favorited by the current user
+  const favIds = await getFavoriteIds([mezmur.id]);
+  const isFavorited = favIds.includes(mezmur.id);
 
   return (
     <div className="mezmur-page animate-in">
@@ -70,6 +76,11 @@ export default async function MezmurPage({
 
         <div className="play-wrapper">
           <PlayMezmurButton track={track} variant="full" />
+          <FavoriteButton
+            mezmurId={mezmur.id}
+            initialFavorited={isFavorited}
+            size={24}
+          />
         </div>
       </header>
 
@@ -171,7 +182,9 @@ const styles = `
 
   .play-wrapper {
     display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 16px;
   }
 
   /* Lyrics Body */

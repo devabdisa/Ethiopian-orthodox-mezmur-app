@@ -393,7 +393,8 @@ export const ModelName = {
   Zemari: 'Zemari',
   Mezmur: 'Mezmur',
   Favorite: 'Favorite',
-  Rating: 'Rating'
+  Rating: 'Rating',
+  ListenHistory: 'ListenHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +410,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating"
+    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating" | "listenHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1154,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    ListenHistory: {
+      payload: Prisma.$ListenHistoryPayload<ExtArgs>
+      fields: Prisma.ListenHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ListenHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ListenHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.ListenHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ListenHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.ListenHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.ListenHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.ListenHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ListenHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.ListenHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        update: {
+          args: Prisma.ListenHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.ListenHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ListenHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ListenHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.ListenHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ListenHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.ListenHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateListenHistory>
+        }
+        groupBy: {
+          args: Prisma.ListenHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ListenHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ListenHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ListenHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1327,6 +1402,16 @@ export const RatingScalarFieldEnum = {
 } as const
 
 export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
+
+
+export const ListenHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mezmurId: 'mezmurId',
+  playedAt: 'playedAt'
+} as const
+
+export type ListenHistoryScalarFieldEnum = (typeof ListenHistoryScalarFieldEnum)[keyof typeof ListenHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1540,6 +1625,7 @@ export type GlobalOmitConfig = {
   mezmur?: Prisma.MezmurOmit
   favorite?: Prisma.FavoriteOmit
   rating?: Prisma.RatingOmit
+  listenHistory?: Prisma.ListenHistoryOmit
 }
 
 /* Types for Logging */

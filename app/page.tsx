@@ -1,6 +1,9 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import prisma from "@/lib/db/prisma";
+import { getListenHistory } from "@/app/actions/history";
+import { getFavoriteIds } from "@/app/actions/favorites";
+import { MezmurRow } from "@/components/mezmur/MezmurRow";
 
 export const metadata: Metadata = {
   title: "ቅዱሳን Mezmur — Ethiopian Orthodox Tewahedo Hymns",
@@ -54,6 +57,25 @@ export default async function HomePage() {
     slug: encodeURIComponent(cat.name),
   }));
 
+  // Fetch recent history if logged in
+  const recentHistory = await getListenHistory(5); // Show top 5
+
+  let favoritedSet = new Set<string>();
+  let recentQueue: any[] = [];
+
+  if (recentHistory.length > 0) {
+    const ids = recentHistory.map((h) => h.mezmur.id);
+    const favs = await getFavoriteIds(ids);
+    favoritedSet = new Set(favs);
+
+    recentQueue = recentHistory.map((h) => ({
+      id: h.mezmur.id,
+      title: h.mezmur.title,
+      youtubeUrl: h.mezmur.youtubeUrl,
+      subCategoryName: h.mezmur.subCategory?.name ?? "",
+    }));
+  }
+
   return (
     <div className="home-page">
       {/* ── Hero ── */}
@@ -65,6 +87,25 @@ export default async function HomePage() {
           Browse by category, read Amharic &amp; Ge&apos;ez lyrics, and listen.
         </p>
       </header>
+
+      {/* ── Recently Played ── */}
+      {recentHistory.length > 0 && (
+        <section className="recent-section">
+          <h2 className="section-title">Recently Played</h2>
+          <div className="recent-list">
+            {recentHistory.map((record, i) => (
+              <MezmurRow
+                key={record.id}
+                mezmur={record.mezmur as any}
+                subCategoryName={record.mezmur.subCategory?.name ?? ""}
+                index={i}
+                queue={recentQueue}
+                isFavorited={favoritedSet.has(record.mezmur.id)}
+              />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Categories grid ── */}
       <section>
@@ -131,6 +172,16 @@ const homeStyles = `
     letter-spacing: 0.1em;
     color: hsl(var(--color-text-3));
     margin-bottom: 16px;
+  }
+
+  .recent-section {
+    margin-bottom: 48px;
+  }
+
+  .recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .categories-grid {

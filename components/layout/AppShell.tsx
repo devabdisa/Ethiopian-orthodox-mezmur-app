@@ -1,13 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Sidebar } from "./Sidebar";
 import { GlobalAudioPlayer } from "./GlobalAudioPlayer";
 import { usePlayerKeyboardShortcuts } from "@/hooks/usePlayerKeyboardShortcuts";
+import { usePlayerStore } from "@/store/playerStore";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   usePlayerKeyboardShortcuts(); // ← Global keyboard shortcuts (Space, M, N, P, ←, →)
+
+  // ── Sync lyrics page with player track changes (Next/Prev) ──────────────
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentTrack = usePlayerStore((s) => s.currentTrack);
+  const prevTrackIdRef = useRef<string | null>(currentTrack?.id ?? null);
+
+  useEffect(() => {
+    const newId = currentTrack?.id ?? null;
+    const prevId = prevTrackIdRef.current;
+    prevTrackIdRef.current = newId;
+
+    // Only navigate when:
+    // 1. The track actually changed to a *different* track (not null → null or same → same)
+    // 2. The user is already on a mezmur lyrics page
+    if (newId && newId !== prevId && pathname.startsWith("/mezmurs/")) {
+      router.push(`/mezmurs/${newId}`);
+    }
+  }, [currentTrack?.id, pathname, router]);
 
   const open = () => setSidebarOpen(true);
   const close = () => setSidebarOpen(false);

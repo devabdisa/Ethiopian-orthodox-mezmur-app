@@ -91,3 +91,8 @@ export type Favorite = Prisma.FavoriteModel
  * 
  */
 export type Rating = Prisma.RatingModel
+/**
+ * Model ListenHistory
+ * 
+ */
+export type ListenHistory = Prisma.ListenHistoryModel

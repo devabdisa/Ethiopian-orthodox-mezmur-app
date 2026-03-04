@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { usePlayerStore } from "@/store/playerStore";
 
 /**
@@ -14,13 +15,22 @@ import { usePlayerStore } from "@/store/playerStore";
  *  ArrowLeft      → Seek -10s
  *  N              → Next track
  *  P              → Previous track
+ *  Ctrl/Cmd + K   → Focus Search
  */
 export function usePlayerKeyboardShortcuts() {
   const { currentTrack, isPlaying, togglePlay, toggleMute, next, previous } =
     usePlayerStore();
+  const router = useRouter();
 
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
+      // Ctrl+K / Cmd+K → navigate to search (works even without a playing track)
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        router.push("/search");
+        return;
+      }
+
       // Don't intercept when user is typing in an input/textarea/select
       const tag = (e.target as HTMLElement)?.tagName;
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;

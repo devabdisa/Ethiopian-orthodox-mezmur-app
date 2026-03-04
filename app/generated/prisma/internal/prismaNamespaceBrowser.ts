@@ -60,7 +60,8 @@ export const ModelName = {
   Zemari: 'Zemari',
   Mezmur: 'Mezmur',
   Favorite: 'Favorite',
-  Rating: 'Rating'
+  Rating: 'Rating',
+  ListenHistory: 'ListenHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -214,6 +215,16 @@ export const RatingScalarFieldEnum = {
 } as const
 
 export type RatingScalarFieldEnum = (typeof RatingScalarFieldEnum)[keyof typeof RatingScalarFieldEnum]
+
+
+export const ListenHistoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mezmurId: 'mezmurId',
+  playedAt: 'playedAt'
+} as const
+
+export type ListenHistoryScalarFieldEnum = (typeof ListenHistoryScalarFieldEnum)[keyof typeof ListenHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -222,6 +222,7 @@ export type MezmurWhereInput = {
   zemari?: Prisma.XOR<Prisma.ZemariNullableScalarRelationFilter, Prisma.ZemariWhereInput> | null
   favorites?: Prisma.FavoriteListRelationFilter
   ratings?: Prisma.RatingListRelationFilter
+  listenHistory?: Prisma.ListenHistoryListRelationFilter
 }
 
 export type MezmurOrderByWithRelationInput = {
@@ -239,6 +240,7 @@ export type MezmurOrderByWithRelationInput = {
   zemari?: Prisma.ZemariOrderByWithRelationInput
   favorites?: Prisma.FavoriteOrderByRelationAggregateInput
   ratings?: Prisma.RatingOrderByRelationAggregateInput
+  listenHistory?: Prisma.ListenHistoryOrderByRelationAggregateInput
 }
 
 export type MezmurWhereUniqueInput = Prisma.AtLeast<{
@@ -259,6 +261,7 @@ export type MezmurWhereUniqueInput = Prisma.AtLeast<{
   zemari?: Prisma.XOR<Prisma.ZemariNullableScalarRelationFilter, Prisma.ZemariWhereInput> | null
   favorites?: Prisma.FavoriteListRelationFilter
   ratings?: Prisma.RatingListRelationFilter
+  listenHistory?: Prisma.ListenHistoryListRelationFilter
 }, "id">
 
 export type MezmurOrderByWithAggregationInput = {
@@ -306,6 +309,7 @@ export type MezmurCreateInput = {
   zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateInput = {
@@ -321,6 +325,7 @@ export type MezmurUncheckedCreateInput = {
   updatedAt?: Date | string
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUpdateInput = {
@@ -336,6 +341,7 @@ export type MezmurUpdateInput = {
   zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateInput = {
@@ -351,6 +357,7 @@ export type MezmurUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateManyInput = {
@@ -575,6 +582,20 @@ export type MezmurUpdateOneRequiredWithoutRatingsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MezmurUpdateToOneWithWhereWithoutRatingsInput, Prisma.MezmurUpdateWithoutRatingsInput>, Prisma.MezmurUncheckedUpdateWithoutRatingsInput>
 }
 
+export type MezmurCreateNestedOneWithoutListenHistoryInput = {
+  create?: Prisma.XOR<Prisma.MezmurCreateWithoutListenHistoryInput, Prisma.MezmurUncheckedCreateWithoutListenHistoryInput>
+  connectOrCreate?: Prisma.MezmurCreateOrConnectWithoutListenHistoryInput
+  connect?: Prisma.MezmurWhereUniqueInput
+}
+
+export type MezmurUpdateOneRequiredWithoutListenHistoryNestedInput = {
+  create?: Prisma.XOR<Prisma.MezmurCreateWithoutListenHistoryInput, Prisma.MezmurUncheckedCreateWithoutListenHistoryInput>
+  connectOrCreate?: Prisma.MezmurCreateOrConnectWithoutListenHistoryInput
+  upsert?: Prisma.MezmurUpsertWithoutListenHistoryInput
+  connect?: Prisma.MezmurWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MezmurUpdateToOneWithWhereWithoutListenHistoryInput, Prisma.MezmurUpdateWithoutListenHistoryInput>, Prisma.MezmurUncheckedUpdateWithoutListenHistoryInput>
+}
+
 export type MezmurCreateWithoutSubCategoryInput = {
   id?: string
   title: string
@@ -587,6 +608,7 @@ export type MezmurCreateWithoutSubCategoryInput = {
   zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutSubCategoryInput = {
@@ -601,6 +623,7 @@ export type MezmurUncheckedCreateWithoutSubCategoryInput = {
   updatedAt?: Date | string
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutSubCategoryInput = {
@@ -657,6 +680,7 @@ export type MezmurCreateWithoutZemariInput = {
   subCategory: Prisma.SubCategoryCreateNestedOneWithoutMezmursInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutZemariInput = {
@@ -671,6 +695,7 @@ export type MezmurUncheckedCreateWithoutZemariInput = {
   updatedAt?: Date | string
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutZemariInput = {
@@ -711,6 +736,7 @@ export type MezmurCreateWithoutFavoritesInput = {
   subCategory: Prisma.SubCategoryCreateNestedOneWithoutMezmursInput
   zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutFavoritesInput = {
@@ -725,6 +751,7 @@ export type MezmurUncheckedCreateWithoutFavoritesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutFavoritesInput = {
@@ -755,6 +782,7 @@ export type MezmurUpdateWithoutFavoritesInput = {
   subCategory?: Prisma.SubCategoryUpdateOneRequiredWithoutMezmursNestedInput
   zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutFavoritesInput = {
@@ -769,6 +797,7 @@ export type MezmurUncheckedUpdateWithoutFavoritesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateWithoutRatingsInput = {
@@ -783,6 +812,7 @@ export type MezmurCreateWithoutRatingsInput = {
   subCategory: Prisma.SubCategoryCreateNestedOneWithoutMezmursInput
   zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
   favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutRatingsInput = {
@@ -797,6 +827,7 @@ export type MezmurUncheckedCreateWithoutRatingsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutRatingsInput = {
@@ -827,6 +858,7 @@ export type MezmurUpdateWithoutRatingsInput = {
   subCategory?: Prisma.SubCategoryUpdateOneRequiredWithoutMezmursNestedInput
   zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutRatingsInput = {
@@ -841,6 +873,83 @@ export type MezmurUncheckedUpdateWithoutRatingsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
+}
+
+export type MezmurCreateWithoutListenHistoryInput = {
+  id?: string
+  title: string
+  lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  meaning?: string | null
+  youtubeUrl?: string | null
+  youtubeUrlSource?: $Enums.YoutubeUrlSource | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subCategory: Prisma.SubCategoryCreateNestedOneWithoutMezmursInput
+  zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+}
+
+export type MezmurUncheckedCreateWithoutListenHistoryInput = {
+  id?: string
+  title: string
+  lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  meaning?: string | null
+  youtubeUrl?: string | null
+  youtubeUrlSource?: $Enums.YoutubeUrlSource | null
+  subCategoryId: string
+  zemariId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+}
+
+export type MezmurCreateOrConnectWithoutListenHistoryInput = {
+  where: Prisma.MezmurWhereUniqueInput
+  create: Prisma.XOR<Prisma.MezmurCreateWithoutListenHistoryInput, Prisma.MezmurUncheckedCreateWithoutListenHistoryInput>
+}
+
+export type MezmurUpsertWithoutListenHistoryInput = {
+  update: Prisma.XOR<Prisma.MezmurUpdateWithoutListenHistoryInput, Prisma.MezmurUncheckedUpdateWithoutListenHistoryInput>
+  create: Prisma.XOR<Prisma.MezmurCreateWithoutListenHistoryInput, Prisma.MezmurUncheckedCreateWithoutListenHistoryInput>
+  where?: Prisma.MezmurWhereInput
+}
+
+export type MezmurUpdateToOneWithWhereWithoutListenHistoryInput = {
+  where?: Prisma.MezmurWhereInput
+  data: Prisma.XOR<Prisma.MezmurUpdateWithoutListenHistoryInput, Prisma.MezmurUncheckedUpdateWithoutListenHistoryInput>
+}
+
+export type MezmurUpdateWithoutListenHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subCategory?: Prisma.SubCategoryUpdateOneRequiredWithoutMezmursNestedInput
+  zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+}
+
+export type MezmurUncheckedUpdateWithoutListenHistoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
+  subCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  zemariId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateManySubCategoryInput = {
@@ -867,6 +976,7 @@ export type MezmurUpdateWithoutSubCategoryInput = {
   zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutSubCategoryInput = {
@@ -881,6 +991,7 @@ export type MezmurUncheckedUpdateWithoutSubCategoryInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateManyWithoutSubCategoryInput = {
@@ -919,6 +1030,7 @@ export type MezmurUpdateWithoutZemariInput = {
   subCategory?: Prisma.SubCategoryUpdateOneRequiredWithoutMezmursNestedInput
   favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutZemariInput = {
@@ -933,6 +1045,7 @@ export type MezmurUncheckedUpdateWithoutZemariInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateManyWithoutZemariInput = {
@@ -955,11 +1068,13 @@ export type MezmurUncheckedUpdateManyWithoutZemariInput = {
 export type MezmurCountOutputType = {
   favorites: number
   ratings: number
+  listenHistory: number
 }
 
 export type MezmurCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   favorites?: boolean | MezmurCountOutputTypeCountFavoritesArgs
   ratings?: boolean | MezmurCountOutputTypeCountRatingsArgs
+  listenHistory?: boolean | MezmurCountOutputTypeCountListenHistoryArgs
 }
 
 /**
@@ -986,6 +1101,13 @@ export type MezmurCountOutputTypeCountRatingsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.RatingWhereInput
 }
 
+/**
+ * MezmurCountOutputType without action
+ */
+export type MezmurCountOutputTypeCountListenHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ListenHistoryWhereInput
+}
+
 
 export type MezmurSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1002,6 +1124,7 @@ export type MezmurSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   zemari?: boolean | Prisma.Mezmur$zemariArgs<ExtArgs>
   favorites?: boolean | Prisma.Mezmur$favoritesArgs<ExtArgs>
   ratings?: boolean | Prisma.Mezmur$ratingsArgs<ExtArgs>
+  listenHistory?: boolean | Prisma.Mezmur$listenHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.MezmurCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mezmur"]>
 
@@ -1054,6 +1177,7 @@ export type MezmurInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   zemari?: boolean | Prisma.Mezmur$zemariArgs<ExtArgs>
   favorites?: boolean | Prisma.Mezmur$favoritesArgs<ExtArgs>
   ratings?: boolean | Prisma.Mezmur$ratingsArgs<ExtArgs>
+  listenHistory?: boolean | Prisma.Mezmur$listenHistoryArgs<ExtArgs>
   _count?: boolean | Prisma.MezmurCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MezmurIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1072,6 +1196,7 @@ export type $MezmurPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     zemari: Prisma.$ZemariPayload<ExtArgs> | null
     favorites: Prisma.$FavoritePayload<ExtArgs>[]
     ratings: Prisma.$RatingPayload<ExtArgs>[]
+    listenHistory: Prisma.$ListenHistoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1482,6 +1607,7 @@ export interface Prisma__MezmurClient<T, Null = never, ExtArgs extends runtime.T
   zemari<T extends Prisma.Mezmur$zemariArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$zemariArgs<ExtArgs>>): Prisma.Prisma__ZemariClient<runtime.Types.Result.GetResult<Prisma.$ZemariPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   favorites<T extends Prisma.Mezmur$favoritesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$favoritesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FavoritePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ratings<T extends Prisma.Mezmur$ratingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$ratingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  listenHistory<T extends Prisma.Mezmur$listenHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$listenHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListenHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1981,6 +2107,30 @@ export type Mezmur$ratingsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.RatingScalarFieldEnum | Prisma.RatingScalarFieldEnum[]
+}
+
+/**
+ * Mezmur.listenHistory
+ */
+export type Mezmur$listenHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ListenHistory
+   */
+  select?: Prisma.ListenHistorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ListenHistory
+   */
+  omit?: Prisma.ListenHistoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ListenHistoryInclude<ExtArgs> | null
+  where?: Prisma.ListenHistoryWhereInput
+  orderBy?: Prisma.ListenHistoryOrderByWithRelationInput | Prisma.ListenHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.ListenHistoryWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ListenHistoryScalarFieldEnum | Prisma.ListenHistoryScalarFieldEnum[]
 }
 
 /**
