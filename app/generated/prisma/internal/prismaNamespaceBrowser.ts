@@ -61,7 +61,9 @@ export const ModelName = {
   Mezmur: 'Mezmur',
   Favorite: 'Favorite',
   Rating: 'Rating',
-  ListenHistory: 'ListenHistory'
+  ListenHistory: 'ListenHistory',
+  AuditLog: 'AuditLog',
+  UserReport: 'UserReport'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -225,6 +227,31 @@ export const ListenHistoryScalarFieldEnum = {
 } as const
 
 export type ListenHistoryScalarFieldEnum = (typeof ListenHistoryScalarFieldEnum)[keyof typeof ListenHistoryScalarFieldEnum]
+
+
+export const AuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  action: 'action',
+  targetId: 'targetId',
+  details: 'details',
+  createdAt: 'createdAt'
+} as const
+
+export type AuditLogScalarFieldEnum = (typeof AuditLogScalarFieldEnum)[keyof typeof AuditLogScalarFieldEnum]
+
+
+export const UserReportScalarFieldEnum = {
+  id: 'id',
+  mezmurId: 'mezmurId',
+  issueType: 'issueType',
+  status: 'status',
+  details: 'details',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UserReportScalarFieldEnum = (typeof UserReportScalarFieldEnum)[keyof typeof UserReportScalarFieldEnum]
 
 
 export const SortOrder = {

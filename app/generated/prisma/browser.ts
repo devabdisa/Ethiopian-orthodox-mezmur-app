@@ -72,3 +72,13 @@ export type Rating = Prisma.RatingModel
  * 
  */
 export type ListenHistory = Prisma.ListenHistoryModel
+/**
+ * Model AuditLog
+ * 
+ */
+export type AuditLog = Prisma.AuditLogModel
+/**
+ * Model UserReport
+ * 
+ */
+export type UserReport = Prisma.UserReportModel

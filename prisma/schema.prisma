@@ -11,6 +11,12 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  USER
+  EDITOR
+  SUPER_ADMIN
+}
+
 // ==============================================
 // Better Auth Models
 // These models are required by Better Auth's
@@ -23,7 +29,7 @@ model User {
   email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
-  role          String    @default("user") // "user" | "admin"
+  role          Role      @default(USER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -32,6 +38,7 @@ model User {
   favorites      Favorite[]
   ratings        Rating[]
   listenHistory  ListenHistory[]
+  auditLogs      AuditLog[]   @relation("UserAuditLogs")
 
   @@map("users")
 }
@@ -160,6 +167,7 @@ model Mezmur {
   favorites      Favorite[]
   ratings        Rating[]
   listenHistory  ListenHistory[]
+  userReports    UserReport[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -210,5 +218,34 @@ model ListenHistory {
   @@unique([userId, mezmurId]) // One entry per user per mezmur (upsert updates playedAt)
   @@index([userId, playedAt(sort: Desc)]) // Fast query for "recently played"
   @@map("listen_history")
+}
+
+// ==============================================
+// Phase 5: Admin & Moderation
+// ==============================================
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation("UserAuditLogs", fields: [userId], references: [id])
+  action    String   // e.g. "UPDATE_MEZMUR", "ADD_URL", "DELETE_CATEGORY"
+  targetId  String?  // The ID of the affected resource (mezmurId, categoryId, etc.)
+  details   String?  // Optional JSON string or extra info
+  createdAt DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model UserReport {
+  id        String   @id @default(cuid())
+  mezmurId  String
+  mezmur    Mezmur   @relation(fields: [mezmurId], references: [id], onDelete: Cascade)
+  issueType String   // e.g. "BROKEN_LINK", "TYPO"
+  status    String   @default("PENDING") // "PENDING", "RESOLVED", "REJECTED"
+  details   String?  // Additional context from the user
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_reports")
 }
 

@@ -9,6 +9,15 @@
 * 🟢 You can import this file directly.
 */
 
+export const Role = {
+  USER: 'USER',
+  EDITOR: 'EDITOR',
+  SUPER_ADMIN: 'SUPER_ADMIN'
+} as const
+
+export type Role = (typeof Role)[keyof typeof Role]
+
+
 export const YoutubeUrlSource = {
   AUTO_FETCHED: 'AUTO_FETCHED',
   ADMIN_OVERRIDE: 'ADMIN_OVERRIDE'

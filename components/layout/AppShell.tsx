@@ -33,6 +33,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const open = () => setSidebarOpen(true);
   const close = () => setSidebarOpen(false);
 
+  // ── Admin routes get their own layout — bypass the public shell entirely ──
+  if (pathname.startsWith("/admin")) {
+    return <>{children}</>;
+  }
+
   return (
     <div className="app-shell">
       {/* ── Mobile overlay (dims content when sidebar is open) ── */}
