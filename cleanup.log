@@ -1,0 +1,21 @@
+[dotenv@17.3.1] injecting env (7) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Starting cleanup of corrupted Mezmur titles...
+PrismaClientKnownRequestError: 
+Invalid `prisma.mezmur.findMany()` invocation in
+C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\scripts\cleanup-corrupted.ts:12:43
+
+   9 console.log("Starting cleanup of corrupted Mezmur titles...");
+  10 
+  11 // Find all auto-fetched mezmurs
+→ 12 const autoFetched = await prisma.mezmur.findMany(
+
+    at zr.handleRequestError (C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\node_modules\.pnpm\@prisma+client@7.4.2_prisma_6e3ba3dfe5bf958e06a14e126c070379\node_modules\@prisma\client\src\runtime\RequestHandler.ts:237:13)
+    at zr.handleAndLogRequestError (C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\node_modules\.pnpm\@prisma+client@7.4.2_prisma_6e3ba3dfe5bf958e06a14e126c070379\node_modules\@prisma\client\src\runtime\RequestHandler.ts:183:12)
+    at zr.request (C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\node_modules\.pnpm\@prisma+client@7.4.2_prisma_6e3ba3dfe5bf958e06a14e126c070379\node_modules\@prisma\client\src\runtime\RequestHandler.ts:152:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async a (C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\node_modules\.pnpm\@prisma+client@7.4.2_prisma_6e3ba3dfe5bf958e06a14e126c070379\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:808:24)
+    at async main (C:\Users\hp\OneDrive\Desktop\Master\orthodox-mezmur\scripts\cleanup-corrupted.ts:12:23) {
+  code: 'ECONNREFUSED',
+  meta: { modelName: 'Mezmur' },
+  clientVersion: '7.4.2'
+}
