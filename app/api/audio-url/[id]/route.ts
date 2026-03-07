@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db/prisma";
-import ytSearch from "yt-search";
+import { google } from "googleapis";
 
 export async function GET(
   req: NextRequest,
@@ -27,30 +27,52 @@ export async function GET(
     const firstLyric = Array.isArray(mezmur.lyrics) 
       ? (mezmur.lyrics.find((l) => typeof l === 'string' && l.trim().length > 0) ?? "") 
       : "";
-    const query = `${mezmur.title} ${firstLyric}`.trim();
+      
+    // Always append "mezmur" to ensure we get an Ethiopian hymn
+    const query = `${mezmur.title} ${firstLyric} mezmur orthodox`.trim();
+
+    // Ensure we have an API key
+    if (!process.env.YOUTUBE_API_KEY) {
+      console.error("[audio-url] Missing YOUTUBE_API_KEY");
+      return NextResponse.json({ error: "Server Configuration Error" }, { status: 500 });
+    }
+
+    const youtube = google.youtube({
+      version: 'v3',
+      auth: process.env.YOUTUBE_API_KEY
+    });
 
     let attempt = 0;
     while (attempt < 3) {
       try {
-        const results = await ytSearch(query);
-        const video = results.videos[0];
-        if (!video) {
+        const response = await youtube.search.list({
+          part: ['id'],
+          q: query,
+          type: ['video'],
+          maxResults: 1
+        });
+
+        const videoId = response.data.items?.[0]?.id?.videoId;
+        
+        if (!videoId) {
           return NextResponse.json(
             { error: "No YouTube results found" },
             { status: 404 },
           );
         }
 
+        const videoUrl = `https://youtube.com/watch?v=${videoId}`;
+
         // Cache it
         await prisma.mezmur.update({
           where: { id },
-          data: { youtubeUrl: video.url, youtubeUrlSource: "AUTO_FETCHED" },
+          data: { youtubeUrl: videoUrl, youtubeUrlSource: "AUTO_FETCHED" },
         });
 
-        return NextResponse.json({ url: video.url });
+        return NextResponse.json({ url: videoUrl });
       } catch (e: any) {
         attempt++;
-        console.error(`[audio-url] Attempt ${attempt} failed:`, e?.message);
+        console.error(`[audio-url] Attempt ${attempt} failed:`, e?.message || e);
         if (attempt < 3) await new Promise((r) => setTimeout(r, attempt * 800));
       }
     }
