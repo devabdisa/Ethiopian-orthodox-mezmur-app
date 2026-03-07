@@ -218,6 +218,7 @@ export function GlobalAudioPlayer() {
           modestbranding: 1,
           playsinline: 1,
           vq: "tiny", // 144p — minimal bandwidth, audio quality unaffected
+          origin: typeof window !== "undefined" ? window.location.origin : "http://localhost:3000"
         },
         events: {
           onReady: (e: any) => {
