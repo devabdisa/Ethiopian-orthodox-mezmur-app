@@ -4,6 +4,8 @@ import prisma from "@/lib/db/prisma";
 import { getListenHistory } from "@/app/actions/history";
 import { getFavoriteIds } from "@/app/actions/favorites";
 import { MezmurRow } from "@/components/mezmur/MezmurRow";
+import { getFeaturedZemarian } from "@/app/actions/zemari";
+import { ZemariCard } from "@/components/ui/ZemariCard";
 
 export const metadata: Metadata = {
   title: "ቅዱሳን Mezmur — Ethiopian Orthodox Tewahedo Hymns",
@@ -32,9 +34,13 @@ const CATEGORY_EMOJI: Record<string, string> = {
   "የፃድቃን እና የቅዱሳን መላእክት መዝሙራት": "😇",
   "የደብረ ታቦር መዝሙራት": "⛰️",
   "የተለያዩ በዓላት ወረብ": "🎶",
+  "የዘማሪያን ስብስብ": "🎙️",
 };
 
 export default async function HomePage() {
+  // Fetch featured Zemarians
+  const featuredZemarians = await getFeaturedZemarian();
+
   // Fetch all categories with mezmur counts (via subcategories)
   const categories = await prisma.category.findMany({
     include: {
@@ -107,6 +113,31 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* ── Featured Zemarian ── */}
+      {featuredZemarians.length > 0 && (
+        <section className="mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="section-title !mb-0">Featured Zemarian</h2>
+            <Link href="/zemarian" className="text-sm font-medium text-accent hover:underline">
+              View All
+            </Link>
+          </div>
+          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory pt-2 scrollbar-hide">
+            {featuredZemarians.map((zemari) => (
+              <div key={zemari.id} className="flex-none snap-start">
+                <ZemariCard
+                  id={zemari.id}
+                  name={zemari.name}
+                  nameAmharic={zemari.nameAmharic}
+                  imageUrl={zemari.imageUrl}
+                  mezmursCount={zemari._count.mezmurs}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ── Categories grid ── */}
       <section>
         <h2 className="section-title">Browse Categories</h2>
@@ -142,6 +173,14 @@ export default async function HomePage() {
 const homeStyles = `
   .home-page {
     padding: 8px 0 40px;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 
   .home-hero {

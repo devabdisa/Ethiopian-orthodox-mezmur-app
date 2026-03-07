@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams, useRouter } from "next/navigation";
 import { transliterate, isLatinText } from "@/lib/amharic-transliterate";
@@ -14,7 +14,7 @@ interface SearchResult {
   matchingLine: string;
 }
 
-export default function SearchPage() {
+function SearchContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -226,6 +226,20 @@ export default function SearchPage() {
 
       <style>{styles}</style>
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <div className="search-page search-loading py-20 text-center text-muted">
+        <span className="loading-spinner mb-4 mx-auto" />
+        <p>Loading search...</p>
+        <style>{styles}</style>
+      </div>
+    }>
+      <SearchContent />
+    </Suspense>
   );
 }
 

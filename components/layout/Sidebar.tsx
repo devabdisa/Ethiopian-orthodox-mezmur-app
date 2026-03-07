@@ -10,7 +10,8 @@ import { useSession, signOut } from "@/lib/auth-client";
 const NAV_ITEMS = [
   { href: "/", label: "Home", icon: HomeIcon },
   { href: "/search", label: "Search", icon: SearchIcon },
-  { href: "/categories", label: "Browse", icon: GridIcon },
+  { href: "/categories", label: "Categories", icon: GridIcon },
+  { href: "/zemarian", label: "Zemarian", icon: MicIcon },
   { href: "/favorites", label: "Favorites", icon: HeartIcon },
 ] as const;
 
@@ -476,6 +477,25 @@ function LogOutIcon({ size = 20 }: { size?: number }) {
       <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
       <polyline points="16 17 21 12 16 7" />
       <line x1="21" y1="12" x2="9" y2="12" />
+    </svg>
+  );
+}
+
+function MicIcon({ size = 20 }: { size?: number }) {
+  return (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round"
+    >
+      <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/>
+      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+      <line x1="12" x2="12" y1="19" y2="22"/>
     </svg>
   );
 }

@@ -1,5 +1,5 @@
 import { Pool } from "pg";
-import { PrismaClient } from "@/app/generated/prisma/client";
+import { PrismaClient } from "../../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const globalForPrisma = global as unknown as {
@@ -19,6 +19,7 @@ const pool =
     connectionTimeoutMillis: 10_000, // fail fast instead of hanging 73s
     keepAlive: true, // TCP keepalive to prevent Neon from dropping idle connections
     keepAliveInitialDelayMillis: 10_000,
+    ssl: { rejectUnauthorized: false },
   });
 if (process.env.NODE_ENV !== "production") globalForPrisma.pool = pool;
 
