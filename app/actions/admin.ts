@@ -226,7 +226,32 @@ export async function updateUserRole(
 }
 
 // ═══════════════════════════════════════════════════════════════════════════════
-// 7. Delete Zemari (SUPER_ADMIN only)
+// 7. Update Zemari (SUPER_ADMIN only)
+// ═══════════════════════════════════════════════════════════════════════════════
+export async function updateZemari(
+  zemariId: string,
+  data: { name?: string; nameAmharic?: string; bio?: string; imageUrl?: string }
+) {
+  const user = await requireAdmin("SUPER_ADMIN");
+
+  const updated = await prisma.zemari.update({
+    where: { id: zemariId },
+    data,
+  });
+
+  await logAudit(
+    user.id,
+    "UPDATE_ZEMARI",
+    zemariId,
+    `Updated: ${updated.name}`,
+  );
+  revalidatePath("/admin/zemarians");
+  revalidatePath("/zemarians");
+  return { success: true };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 8. Delete Zemari (SUPER_ADMIN only)
 // ═══════════════════════════════════════════════════════════════════════════════
 export async function deleteZemari(zemariId: string) {
   const user = await requireAdmin("SUPER_ADMIN");
