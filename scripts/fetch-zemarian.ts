@@ -23,11 +23,11 @@ async function main() {
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
   const ZEMARIAN = [
-    "ዲ/ን አዝማሪያም",
-    "ዘማሪት ምርትነሽ ጥላሁን",
-    "ቀሲስ እንግዳወርቅ በቀለ",
-    "ዘማሪ ይስሐቅ አሰፋ",
-    "ዘማሪት ማርታ ኃይሉ"
+    "ዘማሪ ሮቤል ማቲያስ",
+    "ዲ/ን ልዑል ሰገድ",
+    "ዘማሪ ኪዳኔ ማጆ",
+    "ዘማሪ አቤል መክብብ",
+    "ዘማሪት ፋሲካ መኮንን",
   ];
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
