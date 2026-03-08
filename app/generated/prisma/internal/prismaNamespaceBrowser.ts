@@ -63,7 +63,9 @@ export const ModelName = {
   Rating: 'Rating',
   ListenHistory: 'ListenHistory',
   AuditLog: 'AuditLog',
-  UserReport: 'UserReport'
+  UserReport: 'UserReport',
+  Playlist: 'Playlist',
+  PlaylistMezmur: 'PlaylistMezmur'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -252,6 +254,26 @@ export const UserReportScalarFieldEnum = {
 } as const
 
 export type UserReportScalarFieldEnum = (typeof UserReportScalarFieldEnum)[keyof typeof UserReportScalarFieldEnum]
+
+
+export const PlaylistScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlaylistScalarFieldEnum = (typeof PlaylistScalarFieldEnum)[keyof typeof PlaylistScalarFieldEnum]
+
+
+export const PlaylistMezmurScalarFieldEnum = {
+  playlistId: 'playlistId',
+  mezmurId: 'mezmurId',
+  addedAt: 'addedAt'
+} as const
+
+export type PlaylistMezmurScalarFieldEnum = (typeof PlaylistMezmurScalarFieldEnum)[keyof typeof PlaylistMezmurScalarFieldEnum]
 
 
 export const SortOrder = {

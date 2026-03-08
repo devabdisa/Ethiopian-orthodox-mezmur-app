@@ -396,7 +396,9 @@ export const ModelName = {
   Rating: 'Rating',
   ListenHistory: 'ListenHistory',
   AuditLog: 'AuditLog',
-  UserReport: 'UserReport'
+  UserReport: 'UserReport',
+  Playlist: 'Playlist',
+  PlaylistMezmur: 'PlaylistMezmur'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -412,7 +414,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating" | "listenHistory" | "auditLog" | "userReport"
+    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating" | "listenHistory" | "auditLog" | "userReport" | "playlist" | "playlistMezmur"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1378,6 +1380,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Playlist: {
+      payload: Prisma.$PlaylistPayload<ExtArgs>
+      fields: Prisma.PlaylistFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlaylistFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlaylistFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        findFirst: {
+          args: Prisma.PlaylistFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlaylistFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        findMany: {
+          args: Prisma.PlaylistFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>[]
+        }
+        create: {
+          args: Prisma.PlaylistCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        createMany: {
+          args: Prisma.PlaylistCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlaylistCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>[]
+        }
+        delete: {
+          args: Prisma.PlaylistDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        update: {
+          args: Prisma.PlaylistUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlaylistDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlaylistUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlaylistUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlaylistUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistPayload>
+        }
+        aggregate: {
+          args: Prisma.PlaylistAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlaylist>
+        }
+        groupBy: {
+          args: Prisma.PlaylistGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlaylistGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlaylistCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlaylistCountAggregateOutputType> | number
+        }
+      }
+    }
+    PlaylistMezmur: {
+      payload: Prisma.$PlaylistMezmurPayload<ExtArgs>
+      fields: Prisma.PlaylistMezmurFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PlaylistMezmurFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PlaylistMezmurFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        findFirst: {
+          args: Prisma.PlaylistMezmurFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PlaylistMezmurFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        findMany: {
+          args: Prisma.PlaylistMezmurFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>[]
+        }
+        create: {
+          args: Prisma.PlaylistMezmurCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        createMany: {
+          args: Prisma.PlaylistMezmurCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PlaylistMezmurCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>[]
+        }
+        delete: {
+          args: Prisma.PlaylistMezmurDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        update: {
+          args: Prisma.PlaylistMezmurUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        deleteMany: {
+          args: Prisma.PlaylistMezmurDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PlaylistMezmurUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PlaylistMezmurUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>[]
+        }
+        upsert: {
+          args: Prisma.PlaylistMezmurUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PlaylistMezmurPayload>
+        }
+        aggregate: {
+          args: Prisma.PlaylistMezmurAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePlaylistMezmur>
+        }
+        groupBy: {
+          args: Prisma.PlaylistMezmurGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlaylistMezmurGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PlaylistMezmurCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PlaylistMezmurCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1587,6 +1737,26 @@ export const UserReportScalarFieldEnum = {
 } as const
 
 export type UserReportScalarFieldEnum = (typeof UserReportScalarFieldEnum)[keyof typeof UserReportScalarFieldEnum]
+
+
+export const PlaylistScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PlaylistScalarFieldEnum = (typeof PlaylistScalarFieldEnum)[keyof typeof PlaylistScalarFieldEnum]
+
+
+export const PlaylistMezmurScalarFieldEnum = {
+  playlistId: 'playlistId',
+  mezmurId: 'mezmurId',
+  addedAt: 'addedAt'
+} as const
+
+export type PlaylistMezmurScalarFieldEnum = (typeof PlaylistMezmurScalarFieldEnum)[keyof typeof PlaylistMezmurScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1817,6 +1987,8 @@ export type GlobalOmitConfig = {
   listenHistory?: Prisma.ListenHistoryOmit
   auditLog?: Prisma.AuditLogOmit
   userReport?: Prisma.UserReportOmit
+  playlist?: Prisma.PlaylistOmit
+  playlistMezmur?: Prisma.PlaylistMezmurOmit
 }
 
 /* Types for Logging */

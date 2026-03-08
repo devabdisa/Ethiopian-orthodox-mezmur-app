@@ -4,6 +4,7 @@ import Link from "next/link";
 import { type Mezmur } from "@/app/generated/prisma/client";
 import { PlayMezmurButton } from "./PlayMezmurButton";
 import { FavoriteButton } from "./FavoriteButton";
+import { AddToPlaylistButton } from "./AddToPlaylistButton";
 import type { PlayerTrack } from "@/types";
 
 interface MezmurRowProps {
@@ -45,8 +46,9 @@ export function MezmurRow({
         </div>
       </Link>
 
-      {/* ── Actions: Favorite + Play ── */}
+      {/* ── Actions: Add + Favorite + Play ── */}
       <div className="row-actions">
+        <AddToPlaylistButton mezmurId={mezmur.id} />
         <FavoriteButton
           mezmurId={mezmur.id}
           initialFavorited={isFavorited}

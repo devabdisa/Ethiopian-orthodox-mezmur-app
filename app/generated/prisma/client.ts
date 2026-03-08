@@ -106,3 +106,13 @@ export type AuditLog = Prisma.AuditLogModel
  * 
  */
 export type UserReport = Prisma.UserReportModel
+/**
+ * Model Playlist
+ * 
+ */
+export type Playlist = Prisma.PlaylistModel
+/**
+ * Model PlaylistMezmur
+ * 
+ */
+export type PlaylistMezmur = Prisma.PlaylistMezmurModel
