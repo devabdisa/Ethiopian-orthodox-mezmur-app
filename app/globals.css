@@ -254,6 +254,7 @@ html {
   transition:
     background-color var(--transition-slow),
     color var(--transition-slow);
+  overflow-x: hidden;
 }
 
 body {
@@ -265,6 +266,7 @@ body {
     background-color var(--transition-slow),
     color var(--transition-slow);
   padding-bottom: var(--player-height);
+  overflow-x: hidden;
 }
 
 /* ── Ethiopic text layer ───────────────────────────────────── */
