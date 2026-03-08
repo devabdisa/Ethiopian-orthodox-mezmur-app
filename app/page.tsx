@@ -6,6 +6,7 @@ import { getFavoriteIds } from "@/app/actions/favorites";
 import { MezmurRow } from "@/components/mezmur/MezmurRow";
 import { getFeaturedZemarian } from "@/app/actions/zemari";
 import { ZemariCard } from "@/components/ui/ZemariCard";
+import HeroSection from "@/components/layout/HeroSection";
 
 export const metadata: Metadata = {
   title: "ቅዱሳን Mezmur — Ethiopian Orthodox Tewahedo Hymns",
@@ -85,14 +86,7 @@ export default async function HomePage() {
   return (
     <div className="home-page">
       {/* ── Hero ── */}
-      <header className="home-hero">
-        <h1 className="hero-title font-ethiopic">ቅዱሳን መዝሙሮች 🕊️</h1>
-        <p className="hero-sub">
-          A sacred digital library of Ethiopian Orthodox Tewahedo mezmurs.
-          <br />
-          Browse by category, read Amharic &amp; Ge&apos;ez lyrics, and listen.
-        </p>
-      </header>
+      <HeroSection />
 
       {/* ── Recently Played ── */}
       {recentHistory.length > 0 && (
