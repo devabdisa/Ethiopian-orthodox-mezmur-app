@@ -2,6 +2,7 @@
 
 import { Fragment, useState, useTransition } from "react";
 import { updateCategory, deleteCategory } from "@/app/actions/admin";
+import { CategoryOrderControls } from "@/components/admin/GodModeControls";
 
 interface SubCategory {
   id: string;
@@ -60,8 +61,9 @@ export function CategoryTable({ categories }: { categories: Category[] }) {
           <table className="admin-table">
             <thead>
               <tr>
+                <th style={{ width: "5%" }}>Order</th>
                 <th style={{ width: "5%" }}></th>
-                <th style={{ width: "35%" }}>Category Name</th>
+                <th style={{ width: "30%" }}>Category Name</th>
                 <th style={{ width: "20%" }}>Transliteration</th>
                 <th style={{ width: "15%" }}>SubCategories</th>
                 <th style={{ width: "10%" }}>Mezmurs</th>
@@ -69,10 +71,15 @@ export function CategoryTable({ categories }: { categories: Category[] }) {
               </tr>
             </thead>
             <tbody>
-              {categories.map((cat) => (
+              {categories.map((cat, index) => (
                 <Fragment key={cat.id}>
                   {/* Category Row */}
                   <tr key={cat.id}>
+                    {/* Order Controls */}
+                    <td>
+                      <CategoryOrderControls categories={categories} currentIndex={index} />
+                    </td>
+
                     {/* Expand toggle */}
                     <td>
                       <button
@@ -172,7 +179,7 @@ export function CategoryTable({ categories }: { categories: Category[] }) {
                   {expandedId === cat.id &&
                     cat.subCategories.map((sub) => (
                       <tr key={sub.id} className="sub-row">
-                        <td></td>
+                        <td colSpan={2}></td>
                         <td colSpan={2}>
                           <span className="sub-name">└ {sub.name}</span>
                         </td>

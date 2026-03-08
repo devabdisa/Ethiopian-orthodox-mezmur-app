@@ -11,7 +11,7 @@ export default async function AdminCategoriesPage() {
         orderBy: { name: "asc" },
       },
     },
-    orderBy: { name: "asc" },
+    orderBy: { orderIndex: "asc" },
   });
 
   const formatted = categories.map((cat) => ({

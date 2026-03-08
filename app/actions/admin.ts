@@ -224,3 +224,84 @@ export async function updateUserRole(
   revalidatePath("/admin/users");
   return { success: true };
 }
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 7. Delete Zemari (SUPER_ADMIN only)
+// ═══════════════════════════════════════════════════════════════════════════════
+export async function deleteZemari(zemariId: string) {
+  const user = await requireAdmin("SUPER_ADMIN");
+
+  const zemari = await prisma.zemari.findUnique({
+    where: { id: zemariId },
+    select: { name: true },
+  });
+
+  await prisma.zemari.delete({ where: { id: zemariId } });
+
+  await logAudit(
+    user.id,
+    "DELETE_ZEMARI",
+    zemariId,
+    `Deleted: ${zemari?.name}`,
+  );
+
+  revalidatePath("/admin/zemarians");
+  revalidatePath("/zemarians");
+  return { success: true };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 8. Update Mezmur Assignment (God Mode: EDITOR + SUPER_ADMIN)
+// ═══════════════════════════════════════════════════════════════════════════════
+export async function updateMezmurAssignment(
+  mezmurId: string,
+  newSubCategoryId: string,
+  newZemariId: string | null
+) {
+  const user = await requireAdmin("EDITOR");
+  
+  await prisma.mezmur.update({
+    where: { id: mezmurId },
+    data: { 
+      subCategoryId: newSubCategoryId, 
+      zemariId: newZemariId 
+    }
+  });
+
+  await logAudit(
+    user.id,
+    "UPDATE_MEZMUR_ASSIGNMENT",
+    mezmurId,
+    `Moved to subCategory: ${newSubCategoryId}, zemari: ${newZemariId}`,
+  );
+
+  revalidatePath("/admin/mezmurs");
+  return { success: true };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// 9. Reorder Categories (God Mode: SUPER_ADMIN)
+// ═══════════════════════════════════════════════════════════════════════════════
+export async function reorderCategories(orderedIds: string[]) {
+  const user = await requireAdmin("SUPER_ADMIN");
+  
+  await prisma.$transaction(
+    orderedIds.map((id, index) => 
+      prisma.category.update({
+        where: { id },
+        data: { orderIndex: index }
+      })
+    )
+  );
+  
+  await logAudit(
+    user.id,
+    "REORDER_CATEGORIES",
+    undefined,
+    `Reordered ${orderedIds.length} categories`,
+  );
+
+  revalidatePath("/admin/categories");
+  revalidatePath("/categories");
+  return { success: true };
+}

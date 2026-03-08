@@ -2,13 +2,16 @@
 
 import { useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { updateMezmur } from "@/app/actions/admin";
+import { updateMezmur, deleteMezmur } from "@/app/actions/admin";
+import { MoveMezmurModal, ConfirmDeleteButton } from "@/components/admin/GodModeControls";
 
 interface Mezmur {
   id: string;
   title: string;
   youtubeUrl: string | null;
   lyrics: string[];
+  subCategoryId: string;
+  zemariId: string | null;
   subCategory: {
     id: string;
     name: string;
@@ -21,9 +24,15 @@ interface Category {
   name: string;
 }
 
+interface Zemari {
+  id: string;
+  name: string;
+}
+
 interface Props {
   mezmurs: Mezmur[];
   categories: Category[];
+  zemarians: Zemari[];
   currentPage: number;
   totalPages: number;
   totalCount: number;
@@ -35,6 +44,7 @@ interface Props {
 export function MezmurTable({
   mezmurs,
   categories,
+  zemarians,
   currentPage,
   totalPages,
   totalCount,
@@ -45,6 +55,7 @@ export function MezmurTable({
   const router = useRouter();
   const searchParams = useSearchParams();
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [movingMezmur, setMovingMezmur] = useState<Mezmur | null>(null);
   const [editUrl, setEditUrl] = useState("");
   const [searchInput, setSearchInput] = useState(query);
   const [isPending, startTransition] = useTransition();
@@ -214,8 +225,17 @@ export function MezmurTable({
                         }}
                         title="Edit YouTube URL"
                       >
-                        ✏️
+                        🔗
                       </button>
+                      
+                      <button
+                        className="action-btn edit"
+                        onClick={() => setMovingMezmur(m)}
+                        title="Move to Category/Zemari"
+                      >
+                        🚚
+                      </button>
+
                       <a
                         href={`/mezmurs/${m.id}`}
                         target="_blank"
@@ -225,6 +245,13 @@ export function MezmurTable({
                       >
                         👁️
                       </a>
+                      
+                      <ConfirmDeleteButton 
+                        id={m.id} 
+                        onDelete={async (id) => { await deleteMezmur(id); }} 
+                        itemName="Mezmur" 
+                        className="action-btn delete" 
+                      />
                     </div>
                   </td>
                 </tr>
@@ -255,6 +282,15 @@ export function MezmurTable({
             Next →
           </button>
         </div>
+      )}
+
+      {/* God Mode Editor */}
+      {movingMezmur && (
+        <MoveMezmurModal 
+          mezmur={movingMezmur} 
+          zemarians={zemarians} 
+          onClose={() => setMovingMezmur(null)} 
+        />
       )}
 
       <style>{tableStyles}</style>

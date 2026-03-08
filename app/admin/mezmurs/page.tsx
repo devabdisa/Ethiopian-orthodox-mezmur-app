@@ -38,8 +38,8 @@ export default async function AdminMezmursPage({ searchParams }: Props) {
     where.subCategory = { categoryId: categoryFilter };
   }
 
-  // ── Parallel fetch: count + page data + categories ──────────────────────────
-  const [totalCount, mezmurs, categories] = await Promise.all([
+  // ── Parallel fetch: count + page data + categories + zemarians ──────────────
+  const [totalCount, mezmurs, categories, zemarians] = await Promise.all([
     prisma.mezmur.count({ where }),
     prisma.mezmur.findMany({
       where,
@@ -53,9 +53,13 @@ export default async function AdminMezmursPage({ searchParams }: Props) {
       take: PER_PAGE,
     }),
     prisma.category.findMany({
-      orderBy: { name: "asc" },
+      orderBy: { orderIndex: "asc" },
       select: { id: true, name: true },
     }),
+    prisma.zemari.findMany({
+      orderBy: { name: "asc" },
+      select: { id: true, name: true },
+    })
   ]);
 
   const totalPages = Math.ceil(totalCount / PER_PAGE);
@@ -73,6 +77,7 @@ export default async function AdminMezmursPage({ searchParams }: Props) {
       <MezmurTable
         mezmurs={mezmurs}
         categories={categories}
+        zemarians={zemarians}
         currentPage={page}
         totalPages={totalPages}
         totalCount={totalCount}

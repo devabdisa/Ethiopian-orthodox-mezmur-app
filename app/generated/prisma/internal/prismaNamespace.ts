@@ -1632,6 +1632,7 @@ export const CategoryScalarFieldEnum = {
   nameTransliterated: 'nameTransliterated',
   description: 'description',
   iconName: 'iconName',
+  orderIndex: 'orderIndex',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1645,6 +1646,7 @@ export const SubCategoryScalarFieldEnum = {
   nameTransliterated: 'nameTransliterated',
   description: 'description',
   iconName: 'iconName',
+  orderIndex: 'orderIndex',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1839,20 +1841,6 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'YoutubeUrlSource'
- */
-export type EnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource'>
-    
-
-
-/**
- * Reference to a field of type 'YoutubeUrlSource[]'
- */
-export type ListEnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource[]'>
-    
-
-
-/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1863,6 +1851,20 @@ export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'In
  * Reference to a field of type 'Int[]'
  */
 export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'YoutubeUrlSource'
+ */
+export type EnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource'>
+    
+
+
+/**
+ * Reference to a field of type 'YoutubeUrlSource[]'
+ */
+export type ListEnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource[]'>
     
 
 

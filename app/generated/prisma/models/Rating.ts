@@ -475,14 +475,6 @@ export type RatingUncheckedUpdateManyWithoutMezmurNestedInput = {
   deleteMany?: Prisma.RatingScalarWhereInput | Prisma.RatingScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type RatingCreateWithoutUserInput = {
   id?: string
   value: number

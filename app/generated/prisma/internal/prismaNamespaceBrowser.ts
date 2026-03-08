@@ -149,6 +149,7 @@ export const CategoryScalarFieldEnum = {
   nameTransliterated: 'nameTransliterated',
   description: 'description',
   iconName: 'iconName',
+  orderIndex: 'orderIndex',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -162,6 +163,7 @@ export const SubCategoryScalarFieldEnum = {
   nameTransliterated: 'nameTransliterated',
   description: 'description',
   iconName: 'iconName',
+  orderIndex: 'orderIndex',
   categoryId: 'categoryId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

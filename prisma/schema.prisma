@@ -98,6 +98,7 @@ model Category {
   nameTransliterated String?                // "Praise Hymns" (English equivalent)
   description        String?
   iconName           String?                // Lucide icon name for sidebar UI
+  orderIndex         Int           @default(0)
 
   subCategories SubCategory[]
 
@@ -113,6 +114,7 @@ model SubCategory {
   nameTransliterated String?  // "Holy Trinity"
   description        String?
   iconName           String?  // Lucide icon name
+  orderIndex         Int      @default(0)
 
   categoryId String
   category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
@@ -160,10 +162,10 @@ model Mezmur {
 
   // --- Relationships ---
   subCategoryId String
-  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id])
+  subCategory   SubCategory @relation(fields: [subCategoryId], references: [id], onDelete: Cascade)
 
   zemariId String?
-  zemari   Zemari? @relation(fields: [zemariId], references: [id])
+  zemari   Zemari? @relation(fields: [zemariId], references: [id], onDelete: SetNull)
 
   favorites      Favorite[]
   ratings        Rating[]
