@@ -51,7 +51,7 @@ export default async function HomePage() {
         },
       },
     },
-    orderBy: { name: "asc" },
+    orderBy: { orderIndex: "asc" },
   });
 
   // Compute total mezmur count per category
