@@ -9,7 +9,7 @@ import { ZemariCard } from "@/components/ui/ZemariCard";
 import HeroSection from "@/components/layout/HeroSection";
 
 export const metadata: Metadata = {
-  title: "ቅዱሳን Mezmur — Ethiopian Orthodox Tewahedo Hymns",
+  title: "የዝማሬ ማዕድ | Ethiopian Orthodox Tewahedo Hymns",
   description:
     "Browse 1,272+ Ethiopian Orthodox Tewahedo mezmurs by category. Read Amharic lyrics, Ge'ez translations, and listen.",
 };

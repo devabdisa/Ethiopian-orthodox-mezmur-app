@@ -24,27 +24,27 @@ const notoSerif = Noto_Serif_Ethiopic({
 
 export const metadata: Metadata = {
   title: {
-    default: "ቅዱሳን Mezmur — Ethiopian Orthodox Tewahedo Hymns",
-    template: "%s · ቅዱሳን Mezmur",
+    default: "የዝማሬ ማዕድ | Ethiopian Orthodox Tewahedo Mezmurs",
+    template: "%s | የዝማሬ ማዕድ",
   },
   description:
-    "A sacred digital library of 1,272+ Ethiopian Orthodox Tewahedo mezmurs (hymns) in Amharic and Ge'ez. Browse by category, read lyrics, and listen.",
+    "The ultimate digital sanctuary for Ethiopian Orthodox Tewahedo Mezmurs. Listen to over 1,500+ hymns, discover Zemarian, and curate your spiritual playlists.",
+  applicationName: "የዝማሬ ማዕድ",
   keywords: [
     "Ethiopian Orthodox",
-    "Tewahedo",
     "Mezmur",
-    "Hymns",
-    "Amharic",
+    "Tewahedo",
+    "የኦርቶዶክስ መዝሙር",
+    "Zemari",
     "Ge'ez",
-    "Orthodox Christianity",
-    "ቅዱሳን",
-    "መዝሙር",
   ],
-  authors: [{ name: "ቅዱሳን Mezmur" }],
+  authors: [{ name: "የዝማሬ ማዕድ" }],
   openGraph: {
     type: "website",
     locale: "am_ET",
-    siteName: "ቅዱሳን Mezmur",
+    siteName: "የዝማሬ ማዕድ",
+    title: "የዝማሬ ማዕድ | Ethiopian Orthodox Tewahedo Mezmurs",
+    description: "The ultimate digital sanctuary for Ethiopian Orthodox Tewahedo Mezmurs. Listen to over 1,500+ hymns, discover Zemarian, and curate your spiritual playlists.",
   },
 };
 

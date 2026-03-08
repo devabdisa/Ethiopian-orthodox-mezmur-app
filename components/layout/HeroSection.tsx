@@ -116,7 +116,7 @@ const styles = `
   /* Sacred Watermark */
   .hero-watermark {
     position: absolute;
-    font-size: 380px;
+    font-size: 580px; /* Increased massively for impact */
     color: hsl(var(--color-accent));
     opacity: 0.08; /* Increased from 0.03 for boldness */
     top: 50%;
@@ -287,7 +287,7 @@ const styles = `
     }
     
     .hero-watermark {
-      font-size: 280px;
+      font-size: 420px; /* Masive increase for mobile too */
     }
     
     .glass-card {
