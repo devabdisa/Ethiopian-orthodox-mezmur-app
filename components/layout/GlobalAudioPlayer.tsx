@@ -254,7 +254,6 @@ export function GlobalAudioPlayer() {
         playerVars: {
           autoplay: 1,
           controls: 0,
-          rel: 0,
           modestbranding: 1,
           playsinline: 1,
           vq: "tiny", // 144p — minimal bandwidth, audio quality unaffected
