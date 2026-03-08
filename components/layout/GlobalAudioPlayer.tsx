@@ -119,6 +119,46 @@ export function GlobalAudioPlayer() {
     nextRef.current = next;
   }, [next]);
 
+  // ── Sync OS Media Session (Lockscreen Controls) ──────────────────────────
+  useEffect(() => {
+    if (!("mediaSession" in navigator)) return;
+
+    if (currentTrack) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: currentTrack.title,
+        artist: currentTrack.subCategoryName || "Orthodox Mezmur",
+        album: "ቅዱሳን Mezmur",
+        artwork: [
+          {
+            src: "/logo.png", // Fallback to our app logo since we don't have track arts yet
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
+      });
+
+      // Map physical/OS buttons to our Zustand store actions
+      navigator.mediaSession.setActionHandler("play", togglePlay);
+      navigator.mediaSession.setActionHandler("pause", togglePlay);
+      navigator.mediaSession.setActionHandler("previoustrack", previous);
+      navigator.mediaSession.setActionHandler("nexttrack", next);
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        if (details.fastSeek && "fastSeek" in playerRef.current) {
+          playerRef.current.fastSeek(details.seekTime ?? 0);
+        } else if (playerRef.current?.seekTo) {
+          playerRef.current.seekTo(details.seekTime ?? 0, true);
+        }
+      });
+    } else {
+      navigator.mediaSession.metadata = null;
+      navigator.mediaSession.setActionHandler("play", null);
+      navigator.mediaSession.setActionHandler("pause", null);
+      navigator.mediaSession.setActionHandler("previoustrack", null);
+      navigator.mediaSession.setActionHandler("nexttrack", null);
+      navigator.mediaSession.setActionHandler("seekto", null);
+    }
+  }, [currentTrack, togglePlay, previous, next]);
+
   // ── Step 1: Tear down + resolve URL whenever the track changes ───────────
   // This effect is the single source of truth for player lifecycle.
   // It IMMEDIATELY destroys the old player and clears the container,
@@ -241,6 +281,15 @@ export function GlobalAudioPlayer() {
                 const dur = playerRef.current.getDuration() ?? 0;
                 if (!isSeekingRef.current) setCurrentTime(ct);
                 setLocalDuration(dur);
+
+                // Sync lockscreen progress bar
+                if ("mediaSession" in navigator && dur > 0 && !isSeekingRef.current) {
+                  navigator.mediaSession.setPositionState({
+                    duration: dur,
+                    playbackRate: 1,
+                    position: ct,
+                  });
+                }
               } catch {}
             }, 500);
           },
@@ -259,13 +308,22 @@ export function GlobalAudioPlayer() {
     };
   }, [ytUrl]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Step 3: Sync isPlaying → YT player ───────────────────────────────────
+  // ── Step 3: Sync isPlaying → YT player & OS ────────────────────────────
 
   useEffect(() => {
     if (!playerRef.current) return;
     try {
-      if (isPlaying) playerRef.current.playVideo?.();
-      else playerRef.current.pauseVideo?.();
+      if (isPlaying) {
+        playerRef.current.playVideo?.();
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.playbackState = "playing";
+        }
+      } else {
+        playerRef.current.pauseVideo?.();
+        if ("mediaSession" in navigator) {
+          navigator.mediaSession.playbackState = "paused";
+        }
+      }
     } catch {}
   }, [isPlaying]);
 
