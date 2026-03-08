@@ -173,11 +173,12 @@ const styles = `
   }
 
   .mezmur-title {
-    font-size: clamp(32px, 5vw, 48px);
+    font-size: clamp(28px, 6vw, 48px);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.35;
     margin-bottom: 24px;
     text-shadow: var(--shadow-sm);
+    padding: 0 12px;
   }
 
   .play-wrapper {
@@ -203,9 +204,9 @@ const styles = `
   }
 
   .lyric-line {
-    font-size: clamp(18px, 3vw, 22px);
+    font-size: clamp(17px, 4vw, 24px);
     font-weight: 500;
-    line-height: 2.2;  /* Generous line height for Ethiopic */
+    line-height: 2.4;  /* Generous line height for Ethiopic */
     color: hsl(var(--color-text));
     text-align: center;
     transition: color var(--transition);
@@ -216,7 +217,7 @@ const styles = `
   }
 
   .lyric-gap {
-    height: 24px;
+    height: 32px;
   }
 
   /* Meaning Panel */
@@ -252,12 +253,18 @@ const styles = `
   }
 
   @media (max-width: 640px) {
+    .mezmur-page {
+      padding: 4px 0 40px;
+    }
     .mezmur-header {
       padding-bottom: 32px;
       margin-bottom: 32px;
     }
     .lyrics-wrapper {
-      padding: 32px 20px;
+      padding: 40px 16px;
+      border-radius: var(--radius);
+      border-left: none;
+      border-right: none;
     }
   }
 `;

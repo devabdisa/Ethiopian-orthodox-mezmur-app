@@ -13,8 +13,11 @@
 
 /* ── Layout constants ─────────────────────────────────────── */
 :root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
   --sidebar-width: 240px;
-  --player-height: 90px;
+  --player-base-height: 90px;
+  --player-height: calc(var(--player-base-height) + var(--safe-bottom));
   --radius-sm: 6px;
   --radius: 10px;
   --radius-lg: 16px;
@@ -335,6 +338,7 @@ body {
   left: 0;
   right: 0;
   height: var(--player-height);
+  padding-bottom: var(--safe-bottom);
   background: hsl(var(--color-player-bg));
   border-top: 1px solid hsl(var(--color-border));
   z-index: 50;
@@ -369,6 +373,12 @@ body {
   .sidebar-overlay.is-open {
     display: block;
   }
+}
+
+/* ── Scroll Lock Utility ───────────────────────────────────── */
+body.scroll-locked {
+  overflow: hidden;
+  touch-action: none;
 }
 
 /* ── Utility classes ───────────────────────────────────────── */

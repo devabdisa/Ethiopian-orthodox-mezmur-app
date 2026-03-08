@@ -129,7 +129,7 @@ const styles = `
   .row-actions {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 12px;
     padding-left: 12px;
     flex-shrink: 0;
   }

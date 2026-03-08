@@ -122,9 +122,9 @@ export default async function HomePage() {
               View All
             </Link>
           </div>
-          <div className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory pt-2 scrollbar-hide">
+          <div className="zemarian-carousel scrollbar-hide">
             {featuredZemarians.map((zemari) => (
-              <div key={zemari.id} className="flex-none snap-start">
+              <div key={zemari.id} className="carousel-slide">
                 <ZemariCard
                   id={zemari.id}
                   name={zemari.name}
@@ -227,6 +227,32 @@ const homeStyles = `
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 12px;
+  }
+
+  .zemarian-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+    padding-top: 8px;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .carousel-slide {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    width: 140px; /* Base width for mobile */
+  }
+
+  @media (min-width: 640px) {
+    .zemarian-carousel {
+      gap: 24px;
+    }
+    .carousel-slide {
+      width: 160px; /* Slightly larger on desktop */
+    }
   }
 
   .category-card {

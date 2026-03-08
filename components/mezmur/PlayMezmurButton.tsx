@@ -150,6 +150,13 @@ const styles = `
     0%, 100% { transform: scaleY(1); }
     50% { transform: scaleY(0.4); }
   }
+
+  @media (max-width: 768px) {
+    .play-btn-icon {
+      width: 42px;
+      height: 42px;
+    }
+  }
 `;
 
 function PlayIcon({ size = 20 }: { size?: number }) {

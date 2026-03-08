@@ -33,6 +33,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const open = () => setSidebarOpen(true);
   const close = () => setSidebarOpen(false);
 
+  // ── Prevent body scrolling when mobile sidebar is open ──────────────────
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.classList.add("scroll-locked");
+    } else {
+      document.body.classList.remove("scroll-locked");
+    }
+  }, [sidebarOpen]);
+
   // ── Admin routes get their own layout — bypass the public shell entirely ──
   if (pathname.startsWith("/admin")) {
     return <>{children}</>;
@@ -86,7 +95,7 @@ const shellStyles = `
     display: none;
     align-items: center;
     gap: 14px;
-    padding: 12px 16px;
+    padding: calc(12px + var(--safe-top)) 16px 12px;
     border-bottom: 1px solid hsl(var(--color-border));
     position: sticky;
     top: 0;

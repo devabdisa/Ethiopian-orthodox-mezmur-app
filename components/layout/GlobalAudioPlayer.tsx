@@ -454,6 +454,7 @@ const styles = `
 
   .player-bar {
     height: 100%;
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1.6fr 1fr;
     align-items: center;
@@ -462,7 +463,12 @@ const styles = `
   }
 
   @media (max-width: 768px) {
-    .player-bar { grid-template-columns: 1fr auto; padding: 0 12px; gap: 8px; }
+    .player-bar { 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 0 16px; 
+      gap: 12px; 
+    }
   }
 
   /* ── Track area ── */
@@ -640,7 +646,77 @@ const styles = `
   @keyframes spin { to { transform: rotate(360deg); } }
 
   @media (max-width: 768px) {
-    .player-center { display: none; }
-    .player-right { display: none; }
+    /* The center section now holds the playback controls on the right */
+    .player-center {
+      display: flex;
+      flex-direction: row;
+      width: auto;
+      align-items: center;
+    }
+
+    .player-controls {
+      gap: 2px;
+    }
+
+    /* Increase touch target areas */
+    .player-btn {
+      width: 44px;
+      height: 44px;
+    }
+
+    .player-btn--play {
+      width: 44px;
+      height: 44px;
+    }
+
+    /* Pin progress bar to the absolute top edge of the player */
+    .progress-row {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      max-width: 100%;
+      padding: 0;
+      gap: 0;
+      transform: translateY(-50%);
+      z-index: 10;
+    }
+
+    /* Hide text timestamps to save space */
+    .progress-time {
+      display: none;
+    }
+
+    /* Slimline the slider track */
+    .progress-slider {
+      height: 3px;
+      border-radius: 0;
+      /* Remove safe-area padding gaps on edges */
+      width: 100%;
+    }
+
+    /* Hide slider thumb unless interacting */
+    .progress-slider::-webkit-slider-thumb {
+      width: 12px; height: 12px;
+      opacity: 0;
+    }
+    .progress-slider:active::-webkit-slider-thumb {
+      opacity: 1;
+    }
+
+    /* Hide volume controls on mobile */
+    .player-right {
+      display: none;
+    }
+
+    /* Adjust thumbnail slightly */
+    .player-track-thumb {
+      width: 40px; height: 40px;
+    }
+    
+    .player-track-info {
+      max-width: 140px; /* Prevent long names from pushing controls off screen */
+    }
   }
 `;

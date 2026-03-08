@@ -154,7 +154,7 @@ const sidebarStyles = `
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 20px 20px 16px;
+    padding: calc(20px + var(--safe-top)) 20px 16px;
     border-bottom: 1px solid hsl(var(--color-border));
   }
 
