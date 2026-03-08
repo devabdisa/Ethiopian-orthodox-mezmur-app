@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { createPlaylist, addMezmurToPlaylist, getUserPlaylists } from "@/app/actions/playlist";
 
 export function AddToPlaylistModal({ mezmurId, onClose }: { mezmurId: string; onClose: () => void }) {
@@ -8,8 +9,10 @@ export function AddToPlaylistModal({ mezmurId, onClose }: { mezmurId: string; on
   const [loading, setLoading] = useState(true);
   const [newName, setNewName] = useState("");
   const [isCreating, setIsCreating] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     getUserPlaylists().then((data) => {
       setPlaylists(data);
       setLoading(false);
@@ -29,7 +32,9 @@ export function AddToPlaylistModal({ mezmurId, onClose }: { mezmurId: string; on
     onClose();
   };
 
-  return (
+  if (!mounted) return null;
+
+  return createPortal(
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-wrapper animate-scale-in" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
@@ -65,7 +70,8 @@ export function AddToPlaylistModal({ mezmurId, onClose }: { mezmurId: string; on
         </div>
       </div>
       <style>{styles}</style>
-    </div>
+    </div>,
+    document.body
   );
 }
 
