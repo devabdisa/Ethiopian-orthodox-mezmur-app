@@ -2,6 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/db/prisma";
 import { google } from "googleapis";
 
+// Denomination-accurate blacklist Regex (case-insensitive)
+const BLACKLIST = ["ፓስተር", "ነቢይ", "protestant", "pente", "presence", "pastor", "prophet", "apostolic", "gospel"];
+const blacklistRegex = new RegExp(BLACKLIST.join("|"), "i");
+
+// Result Bouncer Utility
+function isOrthodox(item: any) {
+  const title = item.snippet?.title || "";
+  const channel = item.snippet?.channelTitle || "";
+  return !blacklistRegex.test(title) && !blacklistRegex.test(channel);
+}
+
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> },
@@ -28,8 +39,8 @@ export async function GET(
       ? (mezmur.lyrics.find((l) => typeof l === 'string' && l.trim().length > 0) ?? "") 
       : "";
       
-    // Always append "mezmur" to ensure we get an Ethiopian hymn
-    const query = `${mezmur.title} ${firstLyric} mezmur orthodox`.trim();
+    // Append mandatory positive keywords and negative exclusion operators
+    const query = `${mezmur.title} ${firstLyric} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`.trim();
 
     // Ensure we have an API key
     if (!process.env.YOUTUBE_API_KEY) {
@@ -46,17 +57,19 @@ export async function GET(
     while (attempt < 3) {
       try {
         const response = await youtube.search.list({
-          part: ['id'],
+          part: ['id', 'snippet'], // Need snippet to check channelTitle & title
           q: query,
           type: ['video'],
-          maxResults: 1
+          maxResults: 5 // Get a few to filter through
         });
 
-        const videoId = response.data.items?.[0]?.id?.videoId;
+        // The Result Bouncer: Find the first item that avoids the blacklist
+        const validItem = response.data.items?.find(isOrthodox);
+        const videoId = validItem?.id?.videoId;
         
         if (!videoId) {
           return NextResponse.json(
-            { error: "No YouTube results found" },
+            { error: "No purely Orthodox YouTube results found" },
             { status: 404 },
           );
         }

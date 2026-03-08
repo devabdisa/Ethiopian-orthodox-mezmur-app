@@ -22,6 +22,10 @@ async function main() {
 
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
+  // Denomination-accurate blacklist Regex (case-insensitive)
+  const BLACKLIST = ["ፓስተር", "ነቢይ", "protestant", "pente", "presence", "pastor", "prophet", "apostolic", "gospel"];
+  const blacklistRegex = new RegExp(BLACKLIST.join("|"), "i");
+
   const ZEMARIAN = [
     "ዘማሪ ሮቤል ማቲያስ",
     "ዲ/ን ልዑል ሰገድ",
@@ -89,7 +93,8 @@ async function main() {
     console.log(`✓ Zemari ensured in DB: ID ${zemariId}`);
 
     // 3. Fetch YouTube Videos
-    const query = encodeURIComponent(`${artistName} መዝሙር orthodox`);
+    // Append mandatory positive keywords and negative exclusion operators
+    const query = encodeURIComponent(`${artistName} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`);
     const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`;
 
     let ytResponse;
@@ -110,7 +115,15 @@ async function main() {
     }
 
     for (const item of ytResponse.items) {
-      const decodedTitle = item.snippet.title
+      // The Result Bouncer (Post-Fetch Filter)
+      const rawTitle = item.snippet?.title || "";
+      const channel = item.snippet?.channelTitle || "";
+      if (blacklistRegex.test(rawTitle) || blacklistRegex.test(channel)) {
+        console.log(`[BOUNCED] Non-Orthodox match: "${rawTitle}" by [${channel}]`);
+        continue;
+      }
+
+      const decodedTitle = rawTitle
         .replace(/&amp;/g, "&")
         .replace(/&#39;/g, "'")
         .replace(/&quot;/g, '"');
