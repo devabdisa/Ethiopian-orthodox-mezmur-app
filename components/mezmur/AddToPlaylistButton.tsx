@@ -11,6 +11,7 @@ export function AddToPlaylistButton({ mezmurId }: { mezmurId: string }) {
       <button 
         onClick={(e) => {
           e.preventDefault(); // Prevent navigating if inside a Link 
+          e.stopPropagation(); // CRITICAL: Stop mobile row click from firing
           setIsOpen(true);
         }}
         className="add-pl-btn"
