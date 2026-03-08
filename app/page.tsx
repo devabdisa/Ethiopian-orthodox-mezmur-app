@@ -243,15 +243,12 @@ const homeStyles = `
   .carousel-slide {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    width: 140px; /* Base width for mobile */
+    width: auto; /* Let the internal ZemariCard handle the sizing naturally */
   }
 
   @media (min-width: 640px) {
     .zemarian-carousel {
       gap: 24px;
-    }
-    .carousel-slide {
-      width: 160px; /* Slightly larger on desktop */
     }
   }
 

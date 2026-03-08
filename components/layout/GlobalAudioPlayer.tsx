@@ -527,6 +527,10 @@ const styles = `
       padding: 0 16px; 
       gap: 12px; 
     }
+    .player-track {
+      flex: 1;
+      min-width: 0;
+    }
   }
 
   /* ── Track area ── */
@@ -710,6 +714,7 @@ const styles = `
       flex-direction: row;
       width: auto;
       align-items: center;
+      flex-shrink: 0; /* Crucial: prevent long titles from pushing controls off screen */
     }
 
     .player-controls {
@@ -774,7 +779,8 @@ const styles = `
     }
     
     .player-track-info {
-      max-width: 140px; /* Prevent long names from pushing controls off screen */
+      flex: 1;
+      min-width: 0; /* Let flexbox handle truncation naturally */
     }
   }
 `;

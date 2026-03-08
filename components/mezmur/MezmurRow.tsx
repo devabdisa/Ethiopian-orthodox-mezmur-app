@@ -73,6 +73,7 @@ const styles = `
     transition: all var(--transition);
     position: relative;
     overflow: hidden;
+    max-width: 100%;
   }
 
   .mezmur-row:hover {
