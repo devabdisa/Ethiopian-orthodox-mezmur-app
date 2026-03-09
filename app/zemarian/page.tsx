@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     "Browse popular Ethiopian Orthodox Tewahedo Zemarian (Singers) and their Mezmurs.",
 };
 
+export const revalidate = 60;
+
 export default async function ZemarianPage() {
   const zemarian = await prisma.zemari.findMany({
     include: {

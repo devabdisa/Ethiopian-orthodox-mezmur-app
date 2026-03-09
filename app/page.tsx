@@ -14,6 +14,8 @@ export const metadata: Metadata = {
     "Browse 1,272+ Ethiopian Orthodox Tewahedo mezmurs by category. Read Amharic lyrics, Ge'ez translations, and listen.",
 };
 
+export const revalidate = 60;
+
 // ── Category emoji map ────────────────────────────────────────────────────────
 const CATEGORY_EMOJI: Record<string, string> = {
   "የምስጋና መዝሙር": "🙌",

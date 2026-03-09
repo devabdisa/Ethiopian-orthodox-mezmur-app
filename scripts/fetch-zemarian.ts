@@ -23,15 +23,25 @@ async function main() {
   const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 
   // Denomination-accurate blacklist Regex (case-insensitive)
-  const BLACKLIST = ["ፓስተር", "ነቢይ", "protestant", "pente", "presence", "pastor", "prophet", "apostolic", "gospel"];
+  const BLACKLIST = [
+    "ፓስተር",
+    "ነቢይ",
+    "protestant",
+    "pente",
+    "presence",
+    "pastor",
+    "prophet",
+    "apostolic",
+    "gospel",
+  ];
   const blacklistRegex = new RegExp(BLACKLIST.join("|"), "i");
 
   const ZEMARIAN = [
-    "ዘማሪ ሮቤል ማቲያስ",
-    "ዲ/ን ልዑል ሰገድ",
-    "ዘማሪ ኪዳኔ ማጆ",
+    // "ዘማሪ ሮቤል ማቲያስ",
+    // "ዲ/ን ልዑል ሰገድ",
+    // "ዘማሪ ኪዳኔ ማጆ",
     "ዘማሪ አቤል መክብብ",
-    "ዘማሪት ፋሲካ መኮንን",
+    // "ዘማሪት ፋሲካ መኮንን",
   ];
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -94,8 +104,10 @@ async function main() {
 
     // 3. Fetch YouTube Videos
     // Append mandatory positive keywords and negative exclusion operators
-    const query = encodeURIComponent(`${artistName} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`);
-    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`;
+    const query = encodeURIComponent(
+      `${artistName} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`,
+    );
+    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=50&key=${YOUTUBE_API_KEY}`;
 
     let ytResponse;
     try {
@@ -119,7 +131,9 @@ async function main() {
       const rawTitle = item.snippet?.title || "";
       const channel = item.snippet?.channelTitle || "";
       if (blacklistRegex.test(rawTitle) || blacklistRegex.test(channel)) {
-        console.log(`[BOUNCED] Non-Orthodox match: "${rawTitle}" by [${channel}]`);
+        console.log(
+          `[BOUNCED] Non-Orthodox match: "${rawTitle}" by [${channel}]`,
+        );
         continue;
       }
 
