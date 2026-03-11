@@ -66,6 +66,20 @@ export default async function HeroSection() {
             By Zemarians
           </Link>
         </div>
+
+        {/* Sign In CTA for guests */}
+        {!isLoggedIn && (
+          <div className="hero-auth-cta animate-in" style={{ '--index': 4 } as any}>
+            <Link href="/auth" className="hero-signin-link">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+              <span><strong>Sign in</strong> to save favorites, create playlists & contribute lyrics</span>
+            </Link>
+          </div>
+        )}
       </div>
 
       <style>{styles}</style>
@@ -299,6 +313,52 @@ const styles = `
     
     .btn {
       width: 100%;
+    }
+  }
+
+  /* Guest Sign-In CTA */
+  .hero-auth-cta {
+    margin-top: -12px;
+  }
+
+  .hero-signin-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    border-radius: 999px;
+    background: hsl(var(--color-surface) / 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--color-border) / 0.5);
+    color: hsl(var(--color-text-2));
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .hero-signin-link strong {
+    color: hsl(var(--color-accent));
+    font-weight: 600;
+  }
+
+  .hero-signin-link:hover {
+    background: hsl(var(--color-accent) / 0.1);
+    border-color: hsl(var(--color-accent) / 0.3);
+    color: hsl(var(--color-text));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px hsl(var(--color-accent) / 0.1);
+  }
+
+  .hero-signin-link svg {
+    color: hsl(var(--color-accent));
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero-signin-link {
+      font-size: 12px;
+      padding: 8px 18px;
     }
   }
 `;
