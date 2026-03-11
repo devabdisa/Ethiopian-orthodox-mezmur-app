@@ -37,11 +37,25 @@ async function main() {
   const blacklistRegex = new RegExp(BLACKLIST.join("|"), "i");
 
   const ZEMARIAN = [
-    // "ዘማሪ ሮቤል ማቲያስ",
-    // "ዲ/ን ልዑል ሰገድ",
-    // "ዘማሪ ኪዳኔ ማጆ",
-    "ዘማሪ አቤል መክብብ",
-    // "ዘማሪት ፋሲካ መኮንን",
+    "ዘማሪት ትዕግስት",
+    "ዘማሪት ምርትነሽ ጥላሁን",
+    "ቴዎድሮስ ዮሴፍ",
+    "ዘማሪ ሮቤል ማቲያስ",
+    "ቀሲስ እንግዳወርቅ በቀለ",
+    "ይልማ ኃይሉ",
+    "ቀሲስ አሸናፊ",
+    "ዘማሪ ሙሉቀን",
+    "ቸርነት ሰናይ",
+    "ዘማሪት ቤተልሔም",
+    "ዘማሪ ዲ/ን ዕዝራ",
+    "ዘማሪ ገብረዮሐንስ ገብረጻድቅ",
+    "ቀሲስ ምንዳዬ",
+    "ዲ/ን አዝማሪያም",
+    "ዘማሪት ጸዳለ",
+    "ዘማሪት ፋሲካ መኮንን",
+    "ሲስተር ሕይወት",
+    "ዘማሪት ማርታ ኃይሉ",
+    "ዘማሪ ዲ/ን ዘአማኑኤል",
   ];
 
   const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
@@ -107,7 +121,7 @@ async function main() {
     const query = encodeURIComponent(
       `${artistName} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`,
     );
-    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=50&key=${YOUTUBE_API_KEY}`;
+    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=40&key=${YOUTUBE_API_KEY}`;
 
     let ytResponse;
     try {

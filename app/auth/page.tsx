@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { signIn, signUp } from "@/lib/auth-client";
 import Link from "next/link";
 
 export default function AuthPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/";
   const [isLogin, setIsLogin] = useState(true);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -52,8 +54,8 @@ export default function AuthPage() {
         }
       }
 
-      // Success! redirect to home
-      router.push("/");
+      // Success! redirect back to where they came from
+      router.push(redirectTo);
       router.refresh();
     } catch (err) {
       setError("An unexpected error occurred.");
@@ -66,7 +68,7 @@ export default function AuthPage() {
     setIsLoading(true);
     await signIn.social({
       provider: "google",
-      callbackURL: "/",
+      callbackURL: redirectTo,
     });
   };
 
@@ -229,33 +231,33 @@ const styles = `
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid hsl(var(--color-border) / 0.5);
     border-radius: 20px;
-    padding: 40px;
+    padding: 32px;
     box-shadow: var(--shadow-xl);
   }
 
   .auth-header {
     text-align: center;
-    margin-bottom: 32px;
+    margin-bottom: 20px;
   }
 
   .auth-logo {
     display: inline-block;
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
     text-decoration: none;
   }
 
   .auth-title {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: hsl(var(--color-text));
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     letter-spacing: -0.02em;
   }
 
   .auth-subtitle {
-    font-size: 15px;
+    font-size: 13px;
     color: hsl(var(--color-text-2));
     line-height: 1.5;
   }
@@ -265,9 +267,9 @@ const styles = `
     color: hsl(0 84% 60%);
     padding: 12px 16px;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -276,13 +278,13 @@ const styles = `
   .auth-form {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
   }
 
   .form-group label {
@@ -310,7 +312,7 @@ const styles = `
 
   .form-group input {
     width: 100%;
-    padding: 14px 16px;
+    padding: 11px 14px;
     background: hsl(var(--color-surface-2));
     border: 1px solid hsl(var(--color-border));
     border-radius: 12px;
@@ -331,9 +333,9 @@ const styles = `
   }
 
   .auth-submit {
-    margin-top: 8px;
+    margin-top: 4px;
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     border-radius: 12px;
     border: none;
     font-size: 16px;
@@ -360,7 +362,7 @@ const styles = `
   .auth-divider {
     position: relative;
     text-align: center;
-    margin: 28px 0;
+    margin: 20px 0;
   }
 
   .auth-divider::before {
@@ -386,7 +388,7 @@ const styles = `
 
   .auth-social-btn {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     background: hsl(var(--color-surface-2));
     border: 1px solid hsl(var(--color-border));
     border-radius: 12px;
@@ -412,7 +414,7 @@ const styles = `
   }
 
   .auth-footer {
-    margin-top: 32px;
+    margin-top: 20px;
     text-align: center;
     font-size: 14px;
     color: hsl(var(--color-text-2));

@@ -92,3 +92,8 @@ export type Playlist = Prisma.PlaylistModel
  * 
  */
 export type PlaylistMezmur = Prisma.PlaylistMezmurModel
+/**
+ * Model LyricsSubmission
+ * 
+ */
+export type LyricsSubmission = Prisma.LyricsSubmissionModel

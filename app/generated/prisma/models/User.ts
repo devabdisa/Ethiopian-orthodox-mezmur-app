@@ -213,6 +213,7 @@ export type UserWhereInput = {
   listenHistory?: Prisma.ListenHistoryListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   playlists?: Prisma.PlaylistListRelationFilter
+  lyricsSubmissions?: Prisma.LyricsSubmissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -231,6 +232,7 @@ export type UserOrderByWithRelationInput = {
   listenHistory?: Prisma.ListenHistoryOrderByRelationAggregateInput
   auditLogs?: Prisma.AuditLogOrderByRelationAggregateInput
   playlists?: Prisma.PlaylistOrderByRelationAggregateInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -252,6 +254,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   listenHistory?: Prisma.ListenHistoryListRelationFilter
   auditLogs?: Prisma.AuditLogListRelationFilter
   playlists?: Prisma.PlaylistListRelationFilter
+  lyricsSubmissions?: Prisma.LyricsSubmissionListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -298,6 +301,7 @@ export type UserCreateInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -316,6 +320,7 @@ export type UserUncheckedCreateInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -334,6 +339,7 @@ export type UserUpdateInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -352,6 +358,7 @@ export type UserUncheckedUpdateInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -543,6 +550,20 @@ export type UserUpdateOneRequiredWithoutPlaylistsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutPlaylistsInput, Prisma.UserUpdateWithoutPlaylistsInput>, Prisma.UserUncheckedUpdateWithoutPlaylistsInput>
 }
 
+export type UserCreateNestedOneWithoutLyricsSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedCreateWithoutLyricsSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLyricsSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutLyricsSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedCreateWithoutLyricsSubmissionsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLyricsSubmissionsInput
+  upsert?: Prisma.UserUpsertWithoutLyricsSubmissionsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLyricsSubmissionsInput, Prisma.UserUpdateWithoutLyricsSubmissionsInput>, Prisma.UserUncheckedUpdateWithoutLyricsSubmissionsInput>
+}
+
 export type UserCreateWithoutSessionsInput = {
   id?: string
   name: string
@@ -558,6 +579,7 @@ export type UserCreateWithoutSessionsInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -575,6 +597,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -608,6 +631,7 @@ export type UserUpdateWithoutSessionsInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -625,6 +649,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -642,6 +667,7 @@ export type UserCreateWithoutAccountsInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -659,6 +685,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -692,6 +719,7 @@ export type UserUpdateWithoutAccountsInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -709,6 +737,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFavoritesInput = {
@@ -726,6 +755,7 @@ export type UserCreateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFavoritesInput = {
@@ -743,6 +773,7 @@ export type UserUncheckedCreateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFavoritesInput = {
@@ -776,6 +807,7 @@ export type UserUpdateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFavoritesInput = {
@@ -793,6 +825,7 @@ export type UserUncheckedUpdateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRatingsInput = {
@@ -810,6 +843,7 @@ export type UserCreateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRatingsInput = {
@@ -827,6 +861,7 @@ export type UserUncheckedCreateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRatingsInput = {
@@ -860,6 +895,7 @@ export type UserUpdateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRatingsInput = {
@@ -877,6 +913,7 @@ export type UserUncheckedUpdateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutListenHistoryInput = {
@@ -894,6 +931,7 @@ export type UserCreateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutListenHistoryInput = {
@@ -911,6 +949,7 @@ export type UserUncheckedCreateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutListenHistoryInput = {
@@ -944,6 +983,7 @@ export type UserUpdateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutListenHistoryInput = {
@@ -961,6 +1001,7 @@ export type UserUncheckedUpdateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAuditLogsInput = {
@@ -978,6 +1019,7 @@ export type UserCreateWithoutAuditLogsInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAuditLogsInput = {
@@ -995,6 +1037,7 @@ export type UserUncheckedCreateWithoutAuditLogsInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAuditLogsInput = {
@@ -1028,6 +1071,7 @@ export type UserUpdateWithoutAuditLogsInput = {
   ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAuditLogsInput = {
@@ -1045,6 +1089,7 @@ export type UserUncheckedUpdateWithoutAuditLogsInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPlaylistsInput = {
@@ -1062,6 +1107,7 @@ export type UserCreateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlaylistsInput = {
@@ -1079,6 +1125,7 @@ export type UserUncheckedCreateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
   auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlaylistsInput = {
@@ -1112,6 +1159,7 @@ export type UserUpdateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlaylistsInput = {
@@ -1129,6 +1177,95 @@ export type UserUncheckedUpdateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
   auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutLyricsSubmissionsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutUserInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogCreateNestedManyWithoutUserInput
+  playlists?: Prisma.PlaylistCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutLyricsSubmissionsInput = {
+  id?: string
+  name: string
+  email: string
+  emailVerified?: boolean
+  image?: string | null
+  role?: $Enums.Role
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutUserInput
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutUserInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutUserInput
+  auditLogs?: Prisma.AuditLogUncheckedCreateNestedManyWithoutUserInput
+  playlists?: Prisma.PlaylistUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutLyricsSubmissionsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedCreateWithoutLyricsSubmissionsInput>
+}
+
+export type UserUpsertWithoutLyricsSubmissionsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedUpdateWithoutLyricsSubmissionsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedCreateWithoutLyricsSubmissionsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutLyricsSubmissionsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLyricsSubmissionsInput, Prisma.UserUncheckedUpdateWithoutLyricsSubmissionsInput>
+}
+
+export type UserUpdateWithoutLyricsSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutUserNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUpdateManyWithoutUserNestedInput
+  playlists?: Prisma.PlaylistUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLyricsSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutUserNestedInput
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutUserNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutUserNestedInput
+  auditLogs?: Prisma.AuditLogUncheckedUpdateManyWithoutUserNestedInput
+  playlists?: Prisma.PlaylistUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1144,6 +1281,7 @@ export type UserCountOutputType = {
   listenHistory: number
   auditLogs: number
   playlists: number
+  lyricsSubmissions: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1154,6 +1292,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   listenHistory?: boolean | UserCountOutputTypeCountListenHistoryArgs
   auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
   playlists?: boolean | UserCountOutputTypeCountPlaylistsArgs
+  lyricsSubmissions?: boolean | UserCountOutputTypeCountLyricsSubmissionsArgs
 }
 
 /**
@@ -1215,6 +1354,13 @@ export type UserCountOutputTypeCountPlaylistsArgs<ExtArgs extends runtime.Types.
   where?: Prisma.PlaylistWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountLyricsSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LyricsSubmissionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1232,6 +1378,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   listenHistory?: boolean | Prisma.User$listenHistoryArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   playlists?: boolean | Prisma.User$playlistsArgs<ExtArgs>
+  lyricsSubmissions?: boolean | Prisma.User$lyricsSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1277,6 +1424,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   listenHistory?: boolean | Prisma.User$listenHistoryArgs<ExtArgs>
   auditLogs?: boolean | Prisma.User$auditLogsArgs<ExtArgs>
   playlists?: boolean | Prisma.User$playlistsArgs<ExtArgs>
+  lyricsSubmissions?: boolean | Prisma.User$lyricsSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1292,6 +1440,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     listenHistory: Prisma.$ListenHistoryPayload<ExtArgs>[]
     auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
     playlists: Prisma.$PlaylistPayload<ExtArgs>[]
+    lyricsSubmissions: Prisma.$LyricsSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1703,6 +1852,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   listenHistory<T extends Prisma.User$listenHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$listenHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListenHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   auditLogs<T extends Prisma.User$auditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   playlists<T extends Prisma.User$playlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$playlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlaylistPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lyricsSubmissions<T extends Prisma.User$lyricsSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$lyricsSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LyricsSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2293,6 +2443,30 @@ export type User$playlistsArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   distinct?: Prisma.PlaylistScalarFieldEnum | Prisma.PlaylistScalarFieldEnum[]
+}
+
+/**
+ * User.lyricsSubmissions
+ */
+export type User$lyricsSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LyricsSubmission
+   */
+  select?: Prisma.LyricsSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LyricsSubmission
+   */
+  omit?: Prisma.LyricsSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LyricsSubmissionInclude<ExtArgs> | null
+  where?: Prisma.LyricsSubmissionWhereInput
+  orderBy?: Prisma.LyricsSubmissionOrderByWithRelationInput | Prisma.LyricsSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.LyricsSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LyricsSubmissionScalarFieldEnum | Prisma.LyricsSubmissionScalarFieldEnum[]
 }
 
 /**

@@ -398,7 +398,8 @@ export const ModelName = {
   AuditLog: 'AuditLog',
   UserReport: 'UserReport',
   Playlist: 'Playlist',
-  PlaylistMezmur: 'PlaylistMezmur'
+  PlaylistMezmur: 'PlaylistMezmur',
+  LyricsSubmission: 'LyricsSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating" | "listenHistory" | "auditLog" | "userReport" | "playlist" | "playlistMezmur"
+    modelProps: "user" | "session" | "account" | "verification" | "category" | "subCategory" | "zemari" | "mezmur" | "favorite" | "rating" | "listenHistory" | "auditLog" | "userReport" | "playlist" | "playlistMezmur" | "lyricsSubmission"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1528,6 +1529,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LyricsSubmission: {
+      payload: Prisma.$LyricsSubmissionPayload<ExtArgs>
+      fields: Prisma.LyricsSubmissionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LyricsSubmissionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LyricsSubmissionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        findFirst: {
+          args: Prisma.LyricsSubmissionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LyricsSubmissionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        findMany: {
+          args: Prisma.LyricsSubmissionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>[]
+        }
+        create: {
+          args: Prisma.LyricsSubmissionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        createMany: {
+          args: Prisma.LyricsSubmissionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LyricsSubmissionCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>[]
+        }
+        delete: {
+          args: Prisma.LyricsSubmissionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        update: {
+          args: Prisma.LyricsSubmissionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        deleteMany: {
+          args: Prisma.LyricsSubmissionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LyricsSubmissionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LyricsSubmissionUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>[]
+        }
+        upsert: {
+          args: Prisma.LyricsSubmissionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LyricsSubmissionPayload>
+        }
+        aggregate: {
+          args: Prisma.LyricsSubmissionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLyricsSubmission>
+        }
+        groupBy: {
+          args: Prisma.LyricsSubmissionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LyricsSubmissionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LyricsSubmissionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LyricsSubmissionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1672,6 +1747,7 @@ export const MezmurScalarFieldEnum = {
   id: 'id',
   title: 'title',
   lyrics: 'lyrics',
+  syncedLyrics: 'syncedLyrics',
   meaning: 'meaning',
   youtubeUrl: 'youtubeUrl',
   youtubeUrlSource: 'youtubeUrlSource',
@@ -1761,12 +1837,35 @@ export const PlaylistMezmurScalarFieldEnum = {
 export type PlaylistMezmurScalarFieldEnum = (typeof PlaylistMezmurScalarFieldEnum)[keyof typeof PlaylistMezmurScalarFieldEnum]
 
 
+export const LyricsSubmissionScalarFieldEnum = {
+  id: 'id',
+  rawText: 'rawText',
+  formattedLines: 'formattedLines',
+  status: 'status',
+  adminNote: 'adminNote',
+  mezmurId: 'mezmurId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type LyricsSubmissionScalarFieldEnum = (typeof LyricsSubmissionScalarFieldEnum)[keyof typeof LyricsSubmissionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -1783,6 +1882,15 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
 
@@ -1855,6 +1963,20 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'Json'
+ */
+export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+/**
+ * Reference to a field of type 'QueryMode'
+ */
+export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+/**
  * Reference to a field of type 'YoutubeUrlSource'
  */
 export type EnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource'>
@@ -1865,6 +1987,20 @@ export type EnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<
  * Reference to a field of type 'YoutubeUrlSource[]'
  */
 export type ListEnumYoutubeUrlSourceFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'YoutubeUrlSource[]'>
+    
+
+
+/**
+ * Reference to a field of type 'SubmissionStatus'
+ */
+export type EnumSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'SubmissionStatus[]'
+ */
+export type ListEnumSubmissionStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SubmissionStatus[]'>
     
 
 
@@ -1991,6 +2127,7 @@ export type GlobalOmitConfig = {
   userReport?: Prisma.UserReportOmit
   playlist?: Prisma.PlaylistOmit
   playlistMezmur?: Prisma.PlaylistMezmurOmit
+  lyricsSubmission?: Prisma.LyricsSubmissionOmit
 }
 
 /* Types for Logging */

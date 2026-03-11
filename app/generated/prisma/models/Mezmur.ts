@@ -52,6 +52,7 @@ export type MezmurCountAggregateOutputType = {
   id: number
   title: number
   lyrics: number
+  syncedLyrics: number
   meaning: number
   youtubeUrl: number
   youtubeUrlSource: number
@@ -91,6 +92,7 @@ export type MezmurCountAggregateInputType = {
   id?: true
   title?: true
   lyrics?: true
+  syncedLyrics?: true
   meaning?: true
   youtubeUrl?: true
   youtubeUrlSource?: true
@@ -177,6 +179,7 @@ export type MezmurGroupByOutputType = {
   id: string
   title: string
   lyrics: string[]
+  syncedLyrics: runtime.JsonValue | null
   meaning: string | null
   youtubeUrl: string | null
   youtubeUrlSource: $Enums.YoutubeUrlSource | null
@@ -211,6 +214,7 @@ export type MezmurWhereInput = {
   id?: Prisma.StringFilter<"Mezmur"> | string
   title?: Prisma.StringFilter<"Mezmur"> | string
   lyrics?: Prisma.StringNullableListFilter<"Mezmur">
+  syncedLyrics?: Prisma.JsonNullableFilter<"Mezmur">
   meaning?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrl?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrlSource?: Prisma.EnumYoutubeUrlSourceNullableFilter<"Mezmur"> | $Enums.YoutubeUrlSource | null
@@ -225,12 +229,14 @@ export type MezmurWhereInput = {
   listenHistory?: Prisma.ListenHistoryListRelationFilter
   userReports?: Prisma.UserReportListRelationFilter
   playlists?: Prisma.PlaylistMezmurListRelationFilter
+  lyricsSubmissions?: Prisma.LyricsSubmissionListRelationFilter
 }
 
 export type MezmurOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   lyrics?: Prisma.SortOrder
+  syncedLyrics?: Prisma.SortOrderInput | Prisma.SortOrder
   meaning?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrlSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -245,6 +251,7 @@ export type MezmurOrderByWithRelationInput = {
   listenHistory?: Prisma.ListenHistoryOrderByRelationAggregateInput
   userReports?: Prisma.UserReportOrderByRelationAggregateInput
   playlists?: Prisma.PlaylistMezmurOrderByRelationAggregateInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionOrderByRelationAggregateInput
 }
 
 export type MezmurWhereUniqueInput = Prisma.AtLeast<{
@@ -254,6 +261,7 @@ export type MezmurWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MezmurWhereInput | Prisma.MezmurWhereInput[]
   title?: Prisma.StringFilter<"Mezmur"> | string
   lyrics?: Prisma.StringNullableListFilter<"Mezmur">
+  syncedLyrics?: Prisma.JsonNullableFilter<"Mezmur">
   meaning?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrl?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrlSource?: Prisma.EnumYoutubeUrlSourceNullableFilter<"Mezmur"> | $Enums.YoutubeUrlSource | null
@@ -268,12 +276,14 @@ export type MezmurWhereUniqueInput = Prisma.AtLeast<{
   listenHistory?: Prisma.ListenHistoryListRelationFilter
   userReports?: Prisma.UserReportListRelationFilter
   playlists?: Prisma.PlaylistMezmurListRelationFilter
+  lyricsSubmissions?: Prisma.LyricsSubmissionListRelationFilter
 }, "id">
 
 export type MezmurOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   lyrics?: Prisma.SortOrder
+  syncedLyrics?: Prisma.SortOrderInput | Prisma.SortOrder
   meaning?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   youtubeUrlSource?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -293,6 +303,7 @@ export type MezmurScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Mezmur"> | string
   title?: Prisma.StringWithAggregatesFilter<"Mezmur"> | string
   lyrics?: Prisma.StringNullableListFilter<"Mezmur">
+  syncedLyrics?: Prisma.JsonNullableWithAggregatesFilter<"Mezmur">
   meaning?: Prisma.StringNullableWithAggregatesFilter<"Mezmur"> | string | null
   youtubeUrl?: Prisma.StringNullableWithAggregatesFilter<"Mezmur"> | string | null
   youtubeUrlSource?: Prisma.EnumYoutubeUrlSourceNullableWithAggregatesFilter<"Mezmur"> | $Enums.YoutubeUrlSource | null
@@ -306,6 +317,7 @@ export type MezmurCreateInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -318,12 +330,14 @@ export type MezmurCreateInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -336,12 +350,14 @@ export type MezmurUncheckedCreateInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -354,12 +370,14 @@ export type MezmurUpdateInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -372,12 +390,14 @@ export type MezmurUncheckedUpdateInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateManyInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -391,6 +411,7 @@ export type MezmurUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -402,6 +423,7 @@ export type MezmurUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -433,6 +455,7 @@ export type MezmurCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   title?: Prisma.SortOrder
   lyrics?: Prisma.SortOrder
+  syncedLyrics?: Prisma.SortOrder
   meaning?: Prisma.SortOrder
   youtubeUrl?: Prisma.SortOrder
   youtubeUrlSource?: Prisma.SortOrder
@@ -638,10 +661,25 @@ export type MezmurUpdateOneRequiredWithoutPlaylistsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.MezmurUpdateToOneWithWhereWithoutPlaylistsInput, Prisma.MezmurUpdateWithoutPlaylistsInput>, Prisma.MezmurUncheckedUpdateWithoutPlaylistsInput>
 }
 
+export type MezmurCreateNestedOneWithoutLyricsSubmissionsInput = {
+  create?: Prisma.XOR<Prisma.MezmurCreateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedCreateWithoutLyricsSubmissionsInput>
+  connectOrCreate?: Prisma.MezmurCreateOrConnectWithoutLyricsSubmissionsInput
+  connect?: Prisma.MezmurWhereUniqueInput
+}
+
+export type MezmurUpdateOneRequiredWithoutLyricsSubmissionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MezmurCreateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedCreateWithoutLyricsSubmissionsInput>
+  connectOrCreate?: Prisma.MezmurCreateOrConnectWithoutLyricsSubmissionsInput
+  upsert?: Prisma.MezmurUpsertWithoutLyricsSubmissionsInput
+  connect?: Prisma.MezmurWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.MezmurUpdateToOneWithWhereWithoutLyricsSubmissionsInput, Prisma.MezmurUpdateWithoutLyricsSubmissionsInput>, Prisma.MezmurUncheckedUpdateWithoutLyricsSubmissionsInput>
+}
+
 export type MezmurCreateWithoutSubCategoryInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -653,12 +691,14 @@ export type MezmurCreateWithoutSubCategoryInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutSubCategoryInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -670,6 +710,7 @@ export type MezmurUncheckedCreateWithoutSubCategoryInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutSubCategoryInput = {
@@ -705,6 +746,7 @@ export type MezmurScalarWhereInput = {
   id?: Prisma.StringFilter<"Mezmur"> | string
   title?: Prisma.StringFilter<"Mezmur"> | string
   lyrics?: Prisma.StringNullableListFilter<"Mezmur">
+  syncedLyrics?: Prisma.JsonNullableFilter<"Mezmur">
   meaning?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrl?: Prisma.StringNullableFilter<"Mezmur"> | string | null
   youtubeUrlSource?: Prisma.EnumYoutubeUrlSourceNullableFilter<"Mezmur"> | $Enums.YoutubeUrlSource | null
@@ -718,6 +760,7 @@ export type MezmurCreateWithoutZemariInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -729,12 +772,14 @@ export type MezmurCreateWithoutZemariInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutZemariInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -746,6 +791,7 @@ export type MezmurUncheckedCreateWithoutZemariInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutZemariInput = {
@@ -778,6 +824,7 @@ export type MezmurCreateWithoutFavoritesInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -789,12 +836,14 @@ export type MezmurCreateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutFavoritesInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -806,6 +855,7 @@ export type MezmurUncheckedCreateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutFavoritesInput = {
@@ -828,6 +878,7 @@ export type MezmurUpdateWithoutFavoritesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -839,12 +890,14 @@ export type MezmurUpdateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutFavoritesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -856,12 +909,14 @@ export type MezmurUncheckedUpdateWithoutFavoritesInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateWithoutRatingsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -873,12 +928,14 @@ export type MezmurCreateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutRatingsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -890,6 +947,7 @@ export type MezmurUncheckedCreateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutRatingsInput = {
@@ -912,6 +970,7 @@ export type MezmurUpdateWithoutRatingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -923,12 +982,14 @@ export type MezmurUpdateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutRatingsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -940,12 +1001,14 @@ export type MezmurUncheckedUpdateWithoutRatingsInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateWithoutListenHistoryInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -957,12 +1020,14 @@ export type MezmurCreateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutListenHistoryInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -974,6 +1039,7 @@ export type MezmurUncheckedCreateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutListenHistoryInput = {
@@ -996,6 +1062,7 @@ export type MezmurUpdateWithoutListenHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1007,12 +1074,14 @@ export type MezmurUpdateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutListenHistoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1024,12 +1093,14 @@ export type MezmurUncheckedUpdateWithoutListenHistoryInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateWithoutUserReportsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1041,12 +1112,14 @@ export type MezmurCreateWithoutUserReportsInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutUserReportsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1058,6 +1131,7 @@ export type MezmurUncheckedCreateWithoutUserReportsInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutUserReportsInput = {
@@ -1080,6 +1154,7 @@ export type MezmurUpdateWithoutUserReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1091,12 +1166,14 @@ export type MezmurUpdateWithoutUserReportsInput = {
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutUserReportsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1108,12 +1185,14 @@ export type MezmurUncheckedUpdateWithoutUserReportsInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateWithoutPlaylistsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1125,12 +1204,14 @@ export type MezmurCreateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
   listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurUncheckedCreateWithoutPlaylistsInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1142,6 +1223,7 @@ export type MezmurUncheckedCreateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
   listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
   userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedCreateNestedManyWithoutMezmurInput
 }
 
 export type MezmurCreateOrConnectWithoutPlaylistsInput = {
@@ -1164,6 +1246,7 @@ export type MezmurUpdateWithoutPlaylistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1175,12 +1258,14 @@ export type MezmurUpdateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutPlaylistsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1192,12 +1277,106 @@ export type MezmurUncheckedUpdateWithoutPlaylistsInput = {
   ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
+}
+
+export type MezmurCreateWithoutLyricsSubmissionsInput = {
+  id?: string
+  title: string
+  lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  meaning?: string | null
+  youtubeUrl?: string | null
+  youtubeUrlSource?: $Enums.YoutubeUrlSource | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subCategory: Prisma.SubCategoryCreateNestedOneWithoutMezmursInput
+  zemari?: Prisma.ZemariCreateNestedOneWithoutMezmursInput
+  favorites?: Prisma.FavoriteCreateNestedManyWithoutMezmurInput
+  ratings?: Prisma.RatingCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryCreateNestedManyWithoutMezmurInput
+  userReports?: Prisma.UserReportCreateNestedManyWithoutMezmurInput
+  playlists?: Prisma.PlaylistMezmurCreateNestedManyWithoutMezmurInput
+}
+
+export type MezmurUncheckedCreateWithoutLyricsSubmissionsInput = {
+  id?: string
+  title: string
+  lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  meaning?: string | null
+  youtubeUrl?: string | null
+  youtubeUrlSource?: $Enums.YoutubeUrlSource | null
+  subCategoryId: string
+  zemariId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  favorites?: Prisma.FavoriteUncheckedCreateNestedManyWithoutMezmurInput
+  ratings?: Prisma.RatingUncheckedCreateNestedManyWithoutMezmurInput
+  listenHistory?: Prisma.ListenHistoryUncheckedCreateNestedManyWithoutMezmurInput
+  userReports?: Prisma.UserReportUncheckedCreateNestedManyWithoutMezmurInput
+  playlists?: Prisma.PlaylistMezmurUncheckedCreateNestedManyWithoutMezmurInput
+}
+
+export type MezmurCreateOrConnectWithoutLyricsSubmissionsInput = {
+  where: Prisma.MezmurWhereUniqueInput
+  create: Prisma.XOR<Prisma.MezmurCreateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedCreateWithoutLyricsSubmissionsInput>
+}
+
+export type MezmurUpsertWithoutLyricsSubmissionsInput = {
+  update: Prisma.XOR<Prisma.MezmurUpdateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedUpdateWithoutLyricsSubmissionsInput>
+  create: Prisma.XOR<Prisma.MezmurCreateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedCreateWithoutLyricsSubmissionsInput>
+  where?: Prisma.MezmurWhereInput
+}
+
+export type MezmurUpdateToOneWithWhereWithoutLyricsSubmissionsInput = {
+  where?: Prisma.MezmurWhereInput
+  data: Prisma.XOR<Prisma.MezmurUpdateWithoutLyricsSubmissionsInput, Prisma.MezmurUncheckedUpdateWithoutLyricsSubmissionsInput>
+}
+
+export type MezmurUpdateWithoutLyricsSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subCategory?: Prisma.SubCategoryUpdateOneRequiredWithoutMezmursNestedInput
+  zemari?: Prisma.ZemariUpdateOneWithoutMezmursNestedInput
+  favorites?: Prisma.FavoriteUpdateManyWithoutMezmurNestedInput
+  ratings?: Prisma.RatingUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
+  userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
+  playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+}
+
+export type MezmurUncheckedUpdateWithoutLyricsSubmissionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
+  subCategoryId?: Prisma.StringFieldUpdateOperationsInput | string
+  zemariId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  favorites?: Prisma.FavoriteUncheckedUpdateManyWithoutMezmurNestedInput
+  ratings?: Prisma.RatingUncheckedUpdateManyWithoutMezmurNestedInput
+  listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
+  userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
+  playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurCreateManySubCategoryInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1210,6 +1389,7 @@ export type MezmurUpdateWithoutSubCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1221,12 +1401,14 @@ export type MezmurUpdateWithoutSubCategoryInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutSubCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1238,12 +1420,14 @@ export type MezmurUncheckedUpdateWithoutSubCategoryInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateManyWithoutSubCategoryInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1256,6 +1440,7 @@ export type MezmurCreateManyZemariInput = {
   id?: string
   title: string
   lyrics?: Prisma.MezmurCreatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: string | null
   youtubeUrl?: string | null
   youtubeUrlSource?: $Enums.YoutubeUrlSource | null
@@ -1268,6 +1453,7 @@ export type MezmurUpdateWithoutZemariInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1279,12 +1465,14 @@ export type MezmurUpdateWithoutZemariInput = {
   listenHistory?: Prisma.ListenHistoryUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateWithoutZemariInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1296,12 +1484,14 @@ export type MezmurUncheckedUpdateWithoutZemariInput = {
   listenHistory?: Prisma.ListenHistoryUncheckedUpdateManyWithoutMezmurNestedInput
   userReports?: Prisma.UserReportUncheckedUpdateManyWithoutMezmurNestedInput
   playlists?: Prisma.PlaylistMezmurUncheckedUpdateManyWithoutMezmurNestedInput
+  lyricsSubmissions?: Prisma.LyricsSubmissionUncheckedUpdateManyWithoutMezmurNestedInput
 }
 
 export type MezmurUncheckedUpdateManyWithoutZemariInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   title?: Prisma.StringFieldUpdateOperationsInput | string
   lyrics?: Prisma.MezmurUpdatelyricsInput | string[]
+  syncedLyrics?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   meaning?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   youtubeUrlSource?: Prisma.NullableEnumYoutubeUrlSourceFieldUpdateOperationsInput | $Enums.YoutubeUrlSource | null
@@ -1321,6 +1511,7 @@ export type MezmurCountOutputType = {
   listenHistory: number
   userReports: number
   playlists: number
+  lyricsSubmissions: number
 }
 
 export type MezmurCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1329,6 +1520,7 @@ export type MezmurCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   listenHistory?: boolean | MezmurCountOutputTypeCountListenHistoryArgs
   userReports?: boolean | MezmurCountOutputTypeCountUserReportsArgs
   playlists?: boolean | MezmurCountOutputTypeCountPlaylistsArgs
+  lyricsSubmissions?: boolean | MezmurCountOutputTypeCountLyricsSubmissionsArgs
 }
 
 /**
@@ -1376,11 +1568,19 @@ export type MezmurCountOutputTypeCountPlaylistsArgs<ExtArgs extends runtime.Type
   where?: Prisma.PlaylistMezmurWhereInput
 }
 
+/**
+ * MezmurCountOutputType without action
+ */
+export type MezmurCountOutputTypeCountLyricsSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LyricsSubmissionWhereInput
+}
+
 
 export type MezmurSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   title?: boolean
   lyrics?: boolean
+  syncedLyrics?: boolean
   meaning?: boolean
   youtubeUrl?: boolean
   youtubeUrlSource?: boolean
@@ -1395,6 +1595,7 @@ export type MezmurSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   listenHistory?: boolean | Prisma.Mezmur$listenHistoryArgs<ExtArgs>
   userReports?: boolean | Prisma.Mezmur$userReportsArgs<ExtArgs>
   playlists?: boolean | Prisma.Mezmur$playlistsArgs<ExtArgs>
+  lyricsSubmissions?: boolean | Prisma.Mezmur$lyricsSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.MezmurCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mezmur"]>
 
@@ -1402,6 +1603,7 @@ export type MezmurSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   title?: boolean
   lyrics?: boolean
+  syncedLyrics?: boolean
   meaning?: boolean
   youtubeUrl?: boolean
   youtubeUrlSource?: boolean
@@ -1417,6 +1619,7 @@ export type MezmurSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   id?: boolean
   title?: boolean
   lyrics?: boolean
+  syncedLyrics?: boolean
   meaning?: boolean
   youtubeUrl?: boolean
   youtubeUrlSource?: boolean
@@ -1432,6 +1635,7 @@ export type MezmurSelectScalar = {
   id?: boolean
   title?: boolean
   lyrics?: boolean
+  syncedLyrics?: boolean
   meaning?: boolean
   youtubeUrl?: boolean
   youtubeUrlSource?: boolean
@@ -1441,7 +1645,7 @@ export type MezmurSelectScalar = {
   updatedAt?: boolean
 }
 
-export type MezmurOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "lyrics" | "meaning" | "youtubeUrl" | "youtubeUrlSource" | "subCategoryId" | "zemariId" | "createdAt" | "updatedAt", ExtArgs["result"]["mezmur"]>
+export type MezmurOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "lyrics" | "syncedLyrics" | "meaning" | "youtubeUrl" | "youtubeUrlSource" | "subCategoryId" | "zemariId" | "createdAt" | "updatedAt", ExtArgs["result"]["mezmur"]>
 export type MezmurInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subCategory?: boolean | Prisma.SubCategoryDefaultArgs<ExtArgs>
   zemari?: boolean | Prisma.Mezmur$zemariArgs<ExtArgs>
@@ -1450,6 +1654,7 @@ export type MezmurInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   listenHistory?: boolean | Prisma.Mezmur$listenHistoryArgs<ExtArgs>
   userReports?: boolean | Prisma.Mezmur$userReportsArgs<ExtArgs>
   playlists?: boolean | Prisma.Mezmur$playlistsArgs<ExtArgs>
+  lyricsSubmissions?: boolean | Prisma.Mezmur$lyricsSubmissionsArgs<ExtArgs>
   _count?: boolean | Prisma.MezmurCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MezmurIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1471,11 +1676,13 @@ export type $MezmurPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     listenHistory: Prisma.$ListenHistoryPayload<ExtArgs>[]
     userReports: Prisma.$UserReportPayload<ExtArgs>[]
     playlists: Prisma.$PlaylistMezmurPayload<ExtArgs>[]
+    lyricsSubmissions: Prisma.$LyricsSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     title: string
     lyrics: string[]
+    syncedLyrics: runtime.JsonValue | null
     meaning: string | null
     youtubeUrl: string | null
     youtubeUrlSource: $Enums.YoutubeUrlSource | null
@@ -1884,6 +2091,7 @@ export interface Prisma__MezmurClient<T, Null = never, ExtArgs extends runtime.T
   listenHistory<T extends Prisma.Mezmur$listenHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$listenHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ListenHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userReports<T extends Prisma.Mezmur$userReportsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$userReportsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   playlists<T extends Prisma.Mezmur$playlistsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$playlistsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlaylistMezmurPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  lyricsSubmissions<T extends Prisma.Mezmur$lyricsSubmissionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Mezmur$lyricsSubmissionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LyricsSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1916,6 +2124,7 @@ export interface MezmurFieldRefs {
   readonly id: Prisma.FieldRef<"Mezmur", 'String'>
   readonly title: Prisma.FieldRef<"Mezmur", 'String'>
   readonly lyrics: Prisma.FieldRef<"Mezmur", 'String[]'>
+  readonly syncedLyrics: Prisma.FieldRef<"Mezmur", 'Json'>
   readonly meaning: Prisma.FieldRef<"Mezmur", 'String'>
   readonly youtubeUrl: Prisma.FieldRef<"Mezmur", 'String'>
   readonly youtubeUrlSource: Prisma.FieldRef<"Mezmur", 'YoutubeUrlSource'>
@@ -2455,6 +2664,30 @@ export type Mezmur$playlistsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PlaylistMezmurScalarFieldEnum | Prisma.PlaylistMezmurScalarFieldEnum[]
+}
+
+/**
+ * Mezmur.lyricsSubmissions
+ */
+export type Mezmur$lyricsSubmissionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LyricsSubmission
+   */
+  select?: Prisma.LyricsSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LyricsSubmission
+   */
+  omit?: Prisma.LyricsSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LyricsSubmissionInclude<ExtArgs> | null
+  where?: Prisma.LyricsSubmissionWhereInput
+  orderBy?: Prisma.LyricsSubmissionOrderByWithRelationInput | Prisma.LyricsSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.LyricsSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LyricsSubmissionScalarFieldEnum | Prisma.LyricsSubmissionScalarFieldEnum[]
 }
 
 /**

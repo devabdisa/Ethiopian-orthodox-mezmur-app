@@ -33,13 +33,14 @@ model User {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  sessions       Session[]
-  accounts       Account[]
-  favorites      Favorite[]
-  ratings        Rating[]
-  listenHistory  ListenHistory[]
-  auditLogs      AuditLog[]   @relation("UserAuditLogs")
-  playlists      Playlist[]
+  sessions            Session[]
+  accounts            Account[]
+  favorites           Favorite[]
+  ratings             Rating[]
+  listenHistory       ListenHistory[]
+  auditLogs           AuditLog[]          @relation("UserAuditLogs")
+  playlists           Playlist[]
+  lyricsSubmissions   LyricsSubmission[]
 
   @@map("users")
 }
@@ -150,9 +151,10 @@ enum YoutubeUrlSource {
 
 model Mezmur {
   id      String   @id @default(cuid())
-  title   String   // Amharic title — "ዋይ ዜማ"
-  lyrics  String[] // Postgres array — each element is one verse line
-  meaning String?  // Optional Ge'ez-to-Amharic translation
+  title        String   // Amharic title — "ዋይ ዜማ"
+  lyrics       String[] // Postgres array — each element is one verse line
+  syncedLyrics Json?    // Timestamped lyrics for karaoke sync: [{ time: number, text: string }]
+  meaning      String?  // Optional Ge'ez-to-Amharic translation
 
   // --- YouTube Cache Strategy ---
   // null  = Cache MISS → triggers YouTube Data API v3 search
@@ -167,11 +169,12 @@ model Mezmur {
   zemariId String?
   zemari   Zemari? @relation(fields: [zemariId], references: [id], onDelete: SetNull)
 
-  favorites      Favorite[]
-  ratings        Rating[]
-  listenHistory  ListenHistory[]
-  userReports    UserReport[]
-  playlists      PlaylistMezmur[]
+  favorites           Favorite[]
+  ratings             Rating[]
+  listenHistory       ListenHistory[]
+  userReports         UserReport[]
+  playlists           PlaylistMezmur[]
+  lyricsSubmissions   LyricsSubmission[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -283,5 +286,38 @@ model PlaylistMezmur {
   @@id([playlistId, mezmurId]) // Composite primary key prevents duplicates
   @@index([playlistId, addedAt(sort: Desc)]) 
   @@map("playlist_mezmurs")
+}
+
+// ==============================================
+// Phase 7: Community Lyrics Contributions
+// ==============================================
+
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model LyricsSubmission {
+  id             String           @id @default(cuid())
+  rawText        String           // The raw pasted text from the contributor
+  formattedLines String[]         // Gemini-cleaned lines ready for display
+  status         SubmissionStatus @default(PENDING)
+  adminNote      String?          // Optional note from admin on rejection
+
+  // --- Relationships ---
+  mezmurId String
+  mezmur   Mezmur @relation(fields: [mezmurId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([mezmurId])
+  @@index([userId])
+  @@index([status])
+  @@map("lyrics_submissions")
 }
 

@@ -69,7 +69,8 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
 
       {/* ── Theme switcher ── */}
       <div className="sidebar-section">
-        <p className="nav-section-label">Appearance</p>
+        <p className="nav-section-label">Appearance (Theme)</p>
+        <p className="sidebar-hint">Choose your preferred colors for reading.</p>
         <div className="theme-grid">
           {themes.map((t) => (
             <button
@@ -121,13 +122,18 @@ export function Sidebar({ onClose }: { onClose?: () => void }) {
           </button>
         </div>
       ) : (
-        <Link href="/auth" onClick={onClose} className="sidebar-auth">
-          <div className="auth-avatar">👤</div>
-          <div className="auth-info">
-            <span className="auth-name">Sign In</span>
-            <span className="auth-sub">to save favorites</span>
-          </div>
-        </Link>
+        <div className="sidebar-cta-container">
+          <p className="sidebar-hint" style={{ marginBottom: '8px' }}>
+            Get the full experience
+          </p>
+          <Link href="/auth" onClick={onClose} className="sidebar-cta-card">
+            <div className="cta-icon">👤</div>
+            <div className="cta-content">
+              <span className="cta-title">Sign In / Sign Up</span>
+              <span className="cta-desc">to save favorites, create playlists & contribute lyrics.</span>
+            </div>
+          </Link>
+        </div>
       )}
 
       {/* ── Bottom branding ── */}
@@ -249,6 +255,14 @@ const sidebarStyles = `
     margin: 4px 16px;
   }
 
+  .sidebar-hint {
+    font-size: 11px;
+    color: hsl(var(--color-text-3));
+    padding: 0 10px;
+    margin-bottom: 12px;
+    line-height: 1.4;
+  }
+
   .sidebar-section {
     padding: 12px 10px;
   }
@@ -315,13 +329,58 @@ const sidebarStyles = `
     border-radius: var(--radius);
     background: hsl(var(--color-surface));
     border: 1px solid hsl(var(--color-border));
-    cursor: pointer;
     transition: all var(--transition);
   }
 
-  .sidebar-auth:hover {
-    border-color: hsl(var(--color-accent) / .4);
-    background: hsl(var(--color-overlay));
+  .sidebar-cta-container {
+    padding: 4px 10px;
+    margin-top: 4px;
+  }
+
+  .sidebar-cta-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 16px;
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, hsl(var(--color-accent) / 0.1), hsl(var(--color-accent) / 0.05));
+    border: 1px solid hsl(var(--color-accent) / 0.3);
+    text-decoration: none;
+    transition: all var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sidebar-cta-card:hover {
+    background: linear-gradient(135deg, hsl(var(--color-accent) / 0.15), hsl(var(--color-accent) / 0.1));
+    border-color: hsl(var(--color-accent) / 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px hsl(var(--color-accent) / 0.1);
+  }
+
+  .cta-icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-top: 2px;
+    filter: drop-shadow(0 0 8px hsl(var(--color-accent) / .4));
+  }
+
+  .cta-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cta-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: hsl(var(--color-accent));
+  }
+
+  .cta-desc {
+    font-size: 11px;
+    color: hsl(var(--color-text-2));
+    line-height: 1.4;
   }
 
   .auth-avatar {

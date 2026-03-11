@@ -24,3 +24,12 @@ export const YoutubeUrlSource = {
 } as const
 
 export type YoutubeUrlSource = (typeof YoutubeUrlSource)[keyof typeof YoutubeUrlSource]
+
+
+export const SubmissionStatus = {
+  PENDING: 'PENDING',
+  APPROVED: 'APPROVED',
+  REJECTED: 'REJECTED'
+} as const
+
+export type SubmissionStatus = (typeof SubmissionStatus)[keyof typeof SubmissionStatus]

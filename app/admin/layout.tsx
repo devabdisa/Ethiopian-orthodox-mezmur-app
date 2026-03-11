@@ -59,6 +59,9 @@ export default async function AdminLayout({
           <Link href="/admin/zemarians" className="admin-nav-link">
             Zemarians
           </Link>
+          <Link href="/admin/lyrics" className="admin-nav-link">
+            ✍️ Lyrics
+          </Link>
           {role === "SUPER_ADMIN" && (
             <Link href="/admin/users" className="admin-nav-link">
               Users
