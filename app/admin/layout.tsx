@@ -62,6 +62,9 @@ export default async function AdminLayout({
           <Link href="/admin/lyrics" className="admin-nav-link">
             ✍️ Lyrics
           </Link>
+          <Link href="/admin/tiktok-studio" className="admin-nav-link">
+            🎬 TikTok Studio
+          </Link>
           {role === "SUPER_ADMIN" && (
             <Link href="/admin/users" className="admin-nav-link">
               Users

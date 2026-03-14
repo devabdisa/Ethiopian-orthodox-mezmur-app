@@ -121,7 +121,7 @@ async function main() {
     const query = encodeURIComponent(
       `${artistName} ኦርቶዶክስ ተዋህዶ -ፕሮቴስታንት -ፓስተር -protestant -pente -apostolic`,
     );
-    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=40&key=${YOUTUBE_API_KEY}`;
+    const ytUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&type=video&maxResults=50&key=${YOUTUBE_API_KEY}`;
 
     let ytResponse;
     try {
